@@ -1,6 +1,11 @@
 <?php
+
+//与微信服务器通信代码未完待续！！！
+
+
 //装载模板文件
 include_once("weixin_tpl.php");
+include_once("weixin_config.php");
 
 //自定义微信信息处理类
 class WeiXinAPI
@@ -13,6 +18,15 @@ class WeiXinAPI
 	//NEWS相关
 	private $newsCount = 0;
 	private $newsBody = '';
+	
+	//access_token相关
+	private $access_token = '';
+	private $access_token_expire_time = 0;
+	
+	function __construct()()
+	{
+		GetAccessToken();//要不要放在构造函数中呢？？？？？？？？？？？？
+	}
 	
 	
 	//把post来的数据进行处理
@@ -93,10 +107,84 @@ class WeiXinAPI
 	}
 /****************************
 各种类型消息返回信息生成结束
+*****************************/
+
+/****************************
+与微信服务器通信开始
+*****************************/
+//发送客服消息
+	private function SendServMsg()
+	{
+		$url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.this->$access_token;
+		//？？？？
+	}
+
+//获取AccessToken
+	private function GetAccessToken()
+	{
+		/*------
+		从数据库中读取$access_token以及失效时间
+		--------*/
+		if(time()<$db_access_token_expire_time - 100)
+		{
+			this->$access_token = $db_access_token;
+			return true;
+		}
+        $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.WEIXIN_APPID.'&secret='.WEIXIN_APPSECRET;
+		$data = curl_get($url);
+		$data ? $jsonData = json_decode($data) : return false;
+		if(empty(this->$access_token)) return false;
+		this->$access_token = $jsonData->access_token;
+		$access_token_expire_time = time() + $jsonData->expires_in;
+		/*------
+		将$access_token写入到数据库中！
+		--------*/
+		return true;
+	}
+//封装cURL库
+	private function curl_get($url)
+	{
+		$ch = curl_init();
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// 对认证证书来源的检查，0表示阻止对证书的合法性的检查。
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);// 从证书中检查SSL加密算法是否存在
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);//关闭直接输出
+		curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出
+		curl_setopt($curl, CURLOPT_TIMEOUT, 10);//设置最大等待时间
+		$data = curl_exec($ch);
+		if (curl_errno($curl))
+		{
+            return false;
+        }		
+		curl_close($ch);
+		return $data;
+	}
+	private function curl_post($url, $post)
+	{
+		$ch = curl_init();
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// 对认证证书来源的检查，0表示阻止对证书的合法性的检查。
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);// 从证书中检查SSL加密算法是否存在
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);//关闭直接输出
+		curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出
+		curl_setopt($ch,CURLOPT_POST,1);//使用post提交数据
+		curl_setopt($ch,CURLOPT_POSTFIELDS,$post);//设置 post提交的数据
+		curl_setopt($curl, CURLOPT_TIMEOUT, 10);//设置最大等待时间
+		$data = curl_exec($ch); 
+		if (curl_errno($curl))
+		{
+            return false;
+        }		
+		curl_close($ch);
+		return $data;
+	}
+/****************************
+与微信服务器通信结束
+*****************************/
+	
+/****************************
+验证签名是否合法开始，仅用于最初的网址接入
 *****************************/	
-	
-	
-	//验证签名是否合法，用于最初的网址接入
 	public function valid()
     {
         $echoStr = $_GET["echostr"];
@@ -125,5 +213,7 @@ class WeiXinAPI
 			return false;
 		}
 	}
-
+/****************************
+验证签名是否合法结束
+*****************************/	
 }
