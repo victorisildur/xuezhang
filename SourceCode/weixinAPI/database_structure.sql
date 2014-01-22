@@ -1,4 +1,4 @@
-/* access_token数据表，只有一行数据，只能用UPDATE操作 */
+/* access_token鏁版嵁琛紝鍙湁涓�琛屾暟鎹紝鍙兘鐢║PDATE鎿嶄綔 */
 DROP TABLE IF EXISTS `weixin_access_token`;
 CREATE TABLE IF NOT EXISTS `weixin_access_token`
 (

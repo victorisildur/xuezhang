@@ -1,10 +1,10 @@
 <?php 
-	$db_config["hostname"] = "localhost"; //·þÎñÆ÷µØÖ·
-	$db_config["username"] = "root"; //Êý¾Ý¿âÓÃ»§Ãû
-	$db_config["password"] = "123"; //Êý¾Ý¿âÃÜÂë
-	$db_config["database"] = "test"; //Êý¾Ý¿âÃû³Æ
-	$db_config["charset"] = "utf8";//Êý¾Ý¿â±àÂë
-	$db_config["pconnect"] = 1;//¿ªÆô³Ö¾ÃÁ¬½Ó
-	$db_config["log"] = 0;//¹Ø±ÕÈÕÖ¾
-	$db_config["logfilepath"] = './';//¿ªÆôÈÕÖ¾
+	$db_config["hostname"] = "localhost"; //æœåŠ¡å™¨åœ°å€
+	$db_config["username"] = "root"; //æ•°æ®åº“ç”¨æˆ·å
+	$db_config["password"] = "123"; //æ•°æ®åº“å¯†ç 
+	$db_config["database"] = "test"; //æ•°æ®åº“åç§°
+	$db_config["charset"] = "utf8";//æ•°æ®åº“ç¼–ç 
+	$db_config["pconnect"] = 1;//å¼€å¯æŒä¹…è¿žæŽ¥
+	$db_config["log"] = 0;//å…³é—­æ—¥å¿—
+	$db_config["logfilepath"] = './';//å¼€å¯æ—¥å¿—
 ?>
