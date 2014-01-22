@@ -4,13 +4,16 @@
 
 
 //装载模板文件
-include_once("weixin_tpl.php");
-include_once("weixin_config.php");
+require_once('weixin_tpl.php');
+require_once('weixin_config.php');
+
+//装载数据库类
+require_once('database_class.php');
 
 //自定义微信信息处理类
 class WeiXinAPI
 {
-	private $postObj;
+	public $postObj;
 	private $fromUsername;
 	private $toUsername;
 	public $form_MsgType;
@@ -23,14 +26,20 @@ class WeiXinAPI
 	private $access_token = '';
 	private $access_token_expire_time = 0;
 	
+	//数据库相关
+	private $conn;
+	
+	
 	function __construct()()
 	{
-		GetAccessToken();//要不要放在构造函数中呢？？？？？？？？？？？？
+		this->$conn = new DBClass();
+		//GetAccessToken();//要不要放在构造函数中呢？？？？？？？？？？？？
+		this->parsePostStr();
 	}
 	
 	
 	//把post来的数据进行处理
-	public function parsePostStr()
+	private function parsePostStr()
 	{
 		//获取微信发送数据
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -112,34 +121,33 @@ class WeiXinAPI
 /****************************
 与微信服务器通信开始
 *****************************/
-//发送客服消息
+//发送客服消息(暂时不考虑实现)
 	private function SendServMsg()
 	{
 		$url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.this->$access_token;
-		//？？？？
 	}
 
 //获取AccessToken
 	private function GetAccessToken()
-	{
-		/*------
-		从数据库中读取$access_token以及失效时间
-		--------*/
-		if(time()<$db_access_token_expire_time - 100)
+	{		
+		$result = $conn->get_one('SELECT * FROM `weixin_access_token`');//从数据库中读取$access_token以及失效时间
+		
+		if(time()<$result['expire_time'] - 100)
 		{
-			this->$access_token = $db_access_token;
+			this->$access_token = $result['access_token'];
 			return true;
 		}
-        $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.WEIXIN_APPID.'&secret='.WEIXIN_APPSECRET;
-		$data = curl_get($url);
-		$data ? $jsonData = json_decode($data) : return false;
-		if(empty(this->$access_token)) return false;
-		this->$access_token = $jsonData->access_token;
-		$access_token_expire_time = time() + $jsonData->expires_in;
-		/*------
-		将$access_token写入到数据库中！
-		--------*/
-		return true;
+		else
+		{
+			$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.WEIXIN_APPID.'&secret='.WEIXIN_APPSECRET;
+			$data = curl_get($url);
+			$data ? $jsonData = json_decode($data) : return false;//获取数据失败
+			if(empty($jsonData->access_token)) return false;//返回结果错误
+			this->$access_token = $jsonData->access_token;
+			$access_token_expire_time = time() + $jsonData->expires_in;
+			$conn->query("UPDATE `weixin_access_token` SET access_token = '".this->$access_token."', expire_time = $access_token_expire_time;");//将$access_token写入到数据库中
+			return true;
+		}
 	}
 //封装cURL库
 	private function curl_get($url)
@@ -152,7 +160,7 @@ class WeiXinAPI
 		curl_setopt($ch, CURLOPT_HEADER, 0);//启用时会将头文件的信息作为数据流输出
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);//设置最大等待时间
 		$data = curl_exec($ch);
-		if (curl_errno($curl))
+		if (curl_errno($curl))//0则成功，其他的就是不成功
 		{
             return false;
         }		
