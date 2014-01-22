@@ -9,7 +9,7 @@ Class DBClass {
 	//构造函数
 	public function __construct() {
 		$this->time = $this->microtime_float();
-		require_once("config.db.php");
+		require_once("database_config.php");
 		$this->connect($db_config["hostname"], $db_config["username"], $db_config["password"], $db_config["database"], $db_config["pconnect"]);
 		$this->is_log = $db_config["log"];
 		if($this->is_log){

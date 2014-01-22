@@ -1,7 +1,7 @@
 <?php
-require_once('weixin_class.php');
+require_once('weixin_class_receive.php');
 
-$weixin = new WeiXinAPI();
+$weixin = new WeiXinAPIReceive();
 
 //仅仅第一次用于接口验证时调用
 //$weixin->valid();
@@ -30,6 +30,6 @@ switch ($weixin->form_MsgType)
 		break;
 	*/
 	default:
-		echo $weixin->genTextMsg('嗯，记下了，稍等片刻！');
+		echo $weixin->genTextMsg('嗯，记下了，稍等片刻！'.$weixin->form_MsgType);
 		die();
 }
