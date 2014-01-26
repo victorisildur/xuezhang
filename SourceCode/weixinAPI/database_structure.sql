@@ -8,3 +8,14 @@ CREATE TABLE IF NOT EXISTS `weixin_access_token`
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 INSERT INTO `weixin_access_token` (`access_token`, `expire_time`) VALUES ('0', 0);
+
+/* autoreply数据表，用于匹配和返回自动回复内容，answer为xml格式 */
+DROP TABLE IF EXISTS `weixin_autoreply`;
+CREATE TABLE IF NOT EXISTS `weixin_autoreply`
+(
+	`id` int(10) NOT NULL auto_increment,
+	`question` varchar(100) NOT NULL DEFAULT 0,
+	`answer` text NOT NULL DEFAULT 0,
+	PRIMARY KEY (`id`)
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

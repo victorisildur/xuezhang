@@ -19,7 +19,7 @@ switch ($weixin->form_MsgType)
 		}
 		die();
 	case 'text'://文本消息
-		echo $weixin->genTextMsg('客官莫心急，这就去叫头牌过来陪酒！');
+		echo $weixin->answerText();
 		die();
 	/*
 	case '':
@@ -30,6 +30,6 @@ switch ($weixin->form_MsgType)
 		break;
 	*/
 	default:
-		echo $weixin->genTextMsg('嗯，记下了，稍等片刻！'.$weixin->form_MsgType);
+		echo $weixin->genTextMsg('麻烦客官再说一遍~');
 		die();
 }

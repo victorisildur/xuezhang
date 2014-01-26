@@ -1,3 +1,0 @@
-<?php
-var_dump($_POST);
-var_dump($GLOBALS['HTTP_RAW_POST_DATA']);

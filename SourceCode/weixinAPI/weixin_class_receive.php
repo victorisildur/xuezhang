@@ -6,20 +6,29 @@ require_once('weixin_tpl_receive.php');
 class WeiXinAPIReceive extends WeiXinAPIBase
 {
 	public $postObj;
-	private $fromUsername;
-	private $toUsername;
+	private $fromUsername = '';
+	private $toUsername = '';
 	public $form_MsgType;
 	
 	//NEWS相关
 	private $newsCount = 0;
 	private $newsBody = '';
 /* 
-* 构造函数
+* 构造函数,子类的构造函数实际上是覆盖(override)了父类的构造函数
 */
 	function __construct()
 	{
+		parent::__construct();
 		$this->parsePostStr();
 	}
+/*
+记录用户回复到数据库中
+*/
+	private function logToDatabase()
+	{
+	
+	}
+
 
 /* 
 * 把post来的数据进行处理
@@ -37,6 +46,7 @@ class WeiXinAPIReceive extends WeiXinAPIBase
 		{  
 			//解析数据
 			  $this->postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+			  if(!$this->postObj) return false;
 			//发送消息方ID
 			  $this->fromUsername = $this->postObj->FromUserName;
 			//接收消息方ID
@@ -51,56 +61,59 @@ class WeiXinAPIReceive extends WeiXinAPIBase
 			  return false;
 		}
 	}
-/*
-* 各种类型消息返回信息生成开始
-*/
+	
+	private function getQuestionAnswer($question)
+	{
+		$question = $this->conn->sqlesc($question);
+		$result = $this->conn->get_one("SELECT `answer` from `weixin_autoreply` WHERE question = $question");
+		return $result['answer'];
+	}
+	
+	public function answerText()
+	{
+		$ans = $this->getQuestionAnswer($this->postObj->Content);
+		empty($ans) ? $this->genTextMsg($this->robotAnswer($this->postObj->Content)) : $ans;
+	}
+	
+	private function robotAnswer($keyword)
+	{
+
+		$curlPost=array("chat"=>$keyword);
+		$ch = curl_init();//初始化curl
+		curl_setopt($ch, CURLOPT_URL,'http://www.xiaojo.com/bot/chata.php');//抓取指定网页
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+		curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
+		$data = curl_exec($ch);//运行curl
+		curl_close($ch);
+		if(!empty($data)){
+			return $data;
+		}else{
+			$ran=rand(1,4);
+			switch($ran){
+				case 1:
+					return "小爷累了，还不快陪爷就寝~";
+					break;
+				case 2:
+					return "哎..哎呦...这下舒服多了...";
+					break;
+				case 3:
+					return "嗯哼~~嗯哼哼哼~~终于出来了...";
+					break;
+				case 4:
+					return "来人，护驾！！！";
+					break;
+				default:
+					return "感谢您关注【学长看看】"."\n"."微信号：xuezhangcc";
+					break;
+			}
+		}
+	}
 	//纯文本消息
 	public function genTextMsg($contentStr)
 	{
 		return sprintf(WEIXIN_TEXT_MSG, $this->fromUsername, $this->toUsername, time(), $contentStr);
 	}
-	//图文消息
-	//$url点击图文消息跳转链接
-	//$picUrl图片链接，支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
-	public function addArticle($title, $description, $picUrl, $url)
-	{
-		if($this->newsCount > 10) return false;
-		$this->newsBody += sprintf(WEIXIN_NEWS_MSG_BODY, $title, $description, $picUrl, $url);
-		$this->newsCount += 1;
-		return true;
-	}
-	public function addArticleFinish()
-	{
-		$this->newsBody = sprintf(WEIXIN_NEWS_MSG_BEGIN, $this->fromUsername, $this->toUsername, time(), $this->newsCount) + $this->newsBody;
-		$this->newsBody += WEIXIN_NEWS_MSG_END;
-		return $this->newsBody;
-	}
-	//图片消息
-	//$mediaId通过上传多媒体文件，得到的id
-	public function genImageMsg($mediaId)
-	{
-		return sprintf(WEIXIN_IMAGE_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId);
-	}
-	//语音消息
-	//$mediaId通过上传多媒体文件，得到的id
-	public function genVoiceMsg($mediaId)
-	{
-		return sprintf(WEIXIN_VOICE_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId);
-	}
-	//视频消息
-	//$mediaId通过上传多媒体文件，得到的id，必须
-	//其余项非必须
-	public function genVideoMsg($mediaId, $title = '', $description = '')
-	{
-		return sprintf(WEIXIN_VIDEO_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId, $title, $description);
-	}
-	//音乐消息
-	//$mediaId缩略图的媒体id，通过上传多媒体文件，得到的id
-	//$mediaId为必须项，其他项非必须
-	//$HQMusicUrl高质量音乐链接，WIFI环境优先使用该链接播放音乐
-	public function genMusicMsg($mediaId, $title = '', $description = '', $musicUrl = '', $HQMusicUrl = '')
-	{
-		return sprintf(WEIXIN_MUSIC_MSG, $this->fromUsername, $this->toUsername, time(), $title, $description, $musicUrl, $HQMusicUrl, $mediaId);
-	}
-//结束
 }

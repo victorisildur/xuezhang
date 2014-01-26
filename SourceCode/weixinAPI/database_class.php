@@ -18,6 +18,19 @@ Class DBClass {
 		}
 	}
 	
+	//数据库防注入检查
+	public function sqlesc($value) {
+	// Stripslashes
+	if (get_magic_quotes_gpc()) {
+		$value = stripslashes($value);
+	}
+	// Quote if not a number or a numeric string
+	if (!is_numeric($value)) {
+		$value = "'" . mysql_real_escape_string($value) . "'";
+	}
+	return $value;
+}
+	
 	//数据库连接
 	private function connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect = 0,$charset='utf8') {
 		if( $pconnect==0 ) {
