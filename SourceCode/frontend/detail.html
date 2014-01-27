@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="page_detail" data-theme="a" >
+		<div data-role="header">
+			<h1>毕业，那一年</h1>
+		</div>
+		
+		<div data-role="content">
+			
+			<!--尺码、配送说明-->
+			<div>
+				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
+				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
+				<p>尺码对照表：</p>
+				<img src="img/size_table.jpg" width="100%"/>
+			</div>
+			<!--图片展示-->
+			<div class = detail_gallery>
+				<img src="img/zheda4.jpg"/>
+				<img src="img/zheda5.jpg"/>
+				<img src="img/zheda1.jpg"/>
+				<img src="img/zheda2.jpg"/>
+				<img src="img/zheda3.jpg"/>
+			</div>
+			<!--评论区+购买键-->
+			<div class="comment_buy" >
+				<!--评论区-->
+				<div class="comment_block">
+					<div class="comment_innerblock">
+						<div class="comment">
+							<p><span class="user_name">我倒：</span>nice!这件不错我想要</p>
+						</div>
+						<div class="comment">
+							<p><span class="user_name">剑圣：</span>黄色不错</p>
+						</div>
+						<div class="comment">
+							<p><span class="user_name">莫斯科：</span>够骚</p>
+						</div>
+					</div>
+				</div>
+				<!--评论键-->
+				<div class="button_block">
+					<div class="comment_button">
+						<a href="#" data-role="button"> 评论 </a>
+					</div>
+					<!--购买键-->
+					<div class="buy_button">
+						<a href="#" data-role="button"> 购买 </a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html#page_new" data-ajax="false" data-icon="star">新品</a></li>
+					<li><a href="index.html#page_bestsales" data-ajax="false" data-icon="info">榜单</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

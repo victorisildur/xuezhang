@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+</head>
+
+<body>
+	<form name="purchaserForm" id="purchaseForm" action="xxx.php" method="post" class="ui-mobile-viewport ui-overlay-c">
+		<div data-role="page" id="page_detail" data-theme="a" >
+			<!--头栏-->
+			<div data-role="header">
+				<h1>填订单啦</h1>
+			</div>
+			<div data-role="content">
+				<!--填姓名-->
+				<div data-role="fieldcontain">
+					<label for="user">姓名：</label>
+					<input type="text" name="user" placeholder="姓名">
+				</div>
+				<!--填手机-->
+				<div data-role="fieldcontain">
+					<label for="phone">手机：</label>
+					<input type="text" name="phone" placeholder="手机">
+				</div>
+				<!--下单按钮-->
+				<div data-role="fieldcontain">
+					<a href="" data-role="button">提交订单</a>
+				</div>
+			</div>	
+			<!--尾栏-->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="index.html#page_new" data-ajax="false" data-icon="star">新品</a></li>
+						<li><a href="index.html#page_bestsales" data-ajax="false" data-icon="info">榜单</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+
+</html>

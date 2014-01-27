@@ -1,24 +1,35 @@
 .gallery {
 	margin-top: 2%;
 	background-color: white;
+	display: block;
+}
+.bestsales_gallery img {
+	width:70%;
+	margin-left:15%;
+}
+h1{
+	text-align: center;
+}
+.detail_gallery img{
+	width: 100%;
 }
 .comment_buy {
-	height: 180px;
+	/*height: 80%;*/
+	margin-bottom: 10%;
 }
 
 .comment_block{
-	width: 67%;	
-	float: left;
-	display: inline;
-	margin-top: 2%;
-	background-color: #d8dfea;
+	width: 100%;	
+	/*float: left;*/
+	/*display: inline;*/
+	margin-top:2%;
+	background-color: rgb(245,245,245);
 	border-bottom: 1px solid rgb(181,181,181);
 	border-top: 1px solid rgb(181,181,181);
 }
 .comment_innerblock{
 	padding-left: 5%;
-	padding-right: 2%;
-	
+	padding-right: 2%;	
 }
 .comment{
 	display: block;
@@ -27,9 +38,13 @@
 	border-top: 1px solid rgb(171,171,171);
 	padding-top: 5px;
 	margin-left: 5px;
+	color: black;
+	font-family: 微软雅黑,宋体;
 	/*display:inline;*/
 	/*float:right;*/
-	
+}
+p .user_name{
+	color: blue;
 }
 .comment img{
 	margin-right: 5px;
@@ -39,8 +54,17 @@
 	position:relative;
 	left:0%;
 }
+.button_block{
+	width:100%;
+	padding-bottom:13%;
+}
+.comment_button{
+	width: 35%;
+	/*display:inline;*/
+	float:left;
+}
 .buy_button{
-	width: 30%;
-	float: right;
-	display:inline;
+	width: 35%;
+	/*display:inline;*/
+	float:right;
 }
