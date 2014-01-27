@@ -17,6 +17,38 @@
 				<h1>填订单啦</h1>
 			</div>
 			<div data-role="content">
+				<!--颜色，尺寸，数量-->
+				<!--颜色-->
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup">
+						<legend>请选择颜色：</legend>
+							<label for="red">黑色</label>
+							<input type="radio" name="favcolor" id="red" value="red">
+							<label for="green">灰色</label>
+							<input type="radio" name="favcolor" id="green" value="green">
+							<label for="blue">白色</label>
+							<input type="radio" name="favcolor" id="blue" value="blue">	
+						</fieldset>
+				</div>
+				<!--尺寸-->
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup">
+						<legend>请选择尺寸：</legend>
+							<label for="m">M</label>
+							<input type="radio" name="favcolor" id="m" value="red">
+							<label for="l">L</label>
+							<input type="radio" name="favcolor" id="l" value="green">
+							<label for="xl">XL</label>
+							<input type="radio" name="favcolor" id="xl" value="blue">
+							<label for="xxl">XXL</label>
+							<input type="radio" name="favcolor" id="xxl" value="blue">							
+						</fieldset>
+				</div>
+				<!--数量-->
+				<div data-role="fieldcontain">
+					<label for="quantity">数量：</label>
+					<input type="text" name="quantity" placeholder="数量">
+				</div>
 				<!--填姓名-->
 				<div data-role="fieldcontain">
 					<label for="user">姓名：</label>
