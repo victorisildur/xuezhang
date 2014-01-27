@@ -4,6 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <link rel="stylesheet" href="css/gallery.css">
   <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 </head>
@@ -11,73 +12,149 @@
 
 <body>
 <!--新品页面-->
-<div data-role="page" id="page_new_items">
-<!--内容-->
-  <div data-role="content">
-    <!--图片展示-->
-    <div id="cloth_gallery">
-	  <tr>
-	   <td><img src="img/cloth_1.jpg" height="100px"/></td>
-	   <td><img src="img/cloth_2.jpg" height="100px"/></td>
-	   <td><img src="img/cloth_3.jpg" height="100px"/></td>
-	  </tr>
-	</div>
-	
-	<!--评论区+购买键-->
-	<div>
-	  <!--评论区-->
-	  <div>
-	  </div>
-	  <!--购买键-->
-	  <div>
-	  </div>
-	</div>
-  </div>
-  
- <!-- 尾栏--> 
-  <div data-role="footer" data-position="fixed">
-    <!--导航栏-->
-    <div data-role="navbar" >
-	   <ul>
-	     <li><a href="#" data-icon="star" class="ui-btn-active ui-state-persist" data-iconpos="left">新品</a></li>
-		 <li><a href="#page_my" data-icon="home" data-iconpos="left">我的</a></li>
-		 <li><a href="#" data-icon="info" data-iconpos="left">榜单</a></li>
-	   </ul>
-	</div>
-  </div>
-</div>
+<div data-role="page" id="page_new" data-theme="b" >
+	<!--内容-->
+	<div data-role="content">
+		<!--first block of exhibition-->
+		<div id="div_firstblock">
+			<!--图片展示-->
+			<div class="gallery">
+				<tr>
+				<td><img src="img/cloth_1.jpg" width="49%"/></td>
+				<td><img src="img/cloth_2.jpg" width="49%"/></td>
+				</tr>
+			</div>
+			<!--评论区+购买键-->
+			<div class="comment_buy" >
+				<!--评论区-->
+				<div class="comment_block">
+					<div class="comment_innerblock">
+						<div class="comment">
+							<img src="img/person_1.jpg" width="12%"/><p>nice!这件不错我想要</p>
+						</div>
+						<div class="comment">
+							<img src="img/person_2.jpg" width="12%"/><p>黄色不错</p>
+						</div>
+						<div class="comment">
+							<img src="img/person_3.jpg" width="12%"/><p>够骚</p>
+						</div>
+					</div>
+				</div>
+				<!--购买键-->
+				<div class="buy_button">
+					<a href="#" data-role="button"> 购买 </a>
+				</div>
+			</div>
+		</div>
+		<!--second block of exhibition-->
+		<div>
+			<!--图片展示-->
+			<div class="gallery">
+				<tr>
+				<td><img src="img/cloth_3.jpg" width="49%"/></td>
+				<td><img src="img/cloth_1.jpg" width="49%"/></td>
+				</tr>
+			</div>
+			<!--评论区+购买键-->
+			<div class="comment_buy">
+				<!--评论区-->
+				<div class="comment_block">
+					<div class="comment_innerblock">
+						<div class="comment">
+							<img src="img/person_3.jpg" width="12%"/><p>上海一所大学v5</p>
+						</div>
+						<div class="comment">
+							<img src="img/person_2.jpg" width="12%"/><p>小妹妹你叫什么呀</p>
+						</div>
+						<div class="comment">
+							<img src="img/person_1.jpg" width="12%"/><p>人在塔在！</p>
+						</div>
+					</div>
+				</div>
+				<!--购买键-->
+				<div class="buy_button">
+					<a href="#" data-role="button"> 购买 </a>
+				</div>
+			</div>
+		</div>
+	</div><!--end of content-->
+	<!-- 尾栏--> 
+	<div data-role="footer" data-position="fixed">
+		<!--导航栏-->
+		<div data-role="navbar" >
+			<ul>
+				<li><a href="#" data-icon="star"  data-iconpos="left" class="ui-btn-active ui-state-persist">新品</a></li>
+				<li><a href="#page_bestsales" data-icon="info" data-iconpos="left">榜单</a></li>
+			</ul>
+		</div>
+	</div><!--end of footer-->
+</div><!--end of page_new-->
 
-<!--我的页面-->
-<div data-role="page" id="page_my">
-<!--内容-->
-  <div data-role="content">
-    <!--图片展示-->
-    <div id="cloth_gallery">
-	  <img src="./img/cloth_1.jpg"/>
+<!--榜单页面-->
+<div data-role="page" id="page_bestsales">
+	<!--内容-->
+	<div data-role="content">
+		<!-- No.1 -->
+		<!--图片展示-->
+		<div id="cloth_gallery">
+			<img src="./img/cloth_1.jpg" width="70%"/>
+			<p>No1: 2560人买过</p>
+		</div>
+		<!--评论区+购买键-->
+		<div class="comment_buy">
+			<!--评论区-->
+			<div class="comment_block">
+				<div class="comment_innerblock">
+					<div class="comment">
+						<img src="img/person_3.jpg" width="12%"/><p>把妹无往不利</p>
+					</div>
+					<div class="comment">
+						<img src="img/person_2.jpg" width="12%"/><p>小妹妹你几岁啦</p>
+					</div>
+					<div class="comment">
+						<img src="img/person_1.jpg" width="12%"/><p>万花丛中过</p>
+					</div>
+				</div>
+			</div>			
+		</div>
+		<!-- No.2 -->
+		<!--图片展示-->
+		<div id="cloth_gallery">
+			<img src="./img/cloth_2.jpg" width="70%"/>
+			<p>No2: 2047人买过</p>
+		</div>
+		<!--评论区+购买键-->
+		<div class="comment_buy">
+			<!--评论区-->
+			<div class="comment_block">
+				<div class="comment_innerblock">
+					<div class="comment">
+						<img src="img/person_2.jpg" width="12%"/><p>显出我的腹肌</p>
+					</div>
+					<div class="comment">
+						<img src="img/person_1.jpg" width="12%"/><p>瘦成一道闪电</p>
+					</div>
+					<div class="comment">
+						<img src="img/person_3.jpg" width="12%"/><p>不留一点红</p>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div> 
+    <!-- 尾栏--> 
+	<div data-role="footer" data-position="fixed">
+		<!--导航栏-->
+		<div data-role="navbar" >
+		<ul>
+			<li><a href="#page_new" data-icon="star"  data-iconpos="left">新品</a></li>
+			<li><a href="#" data-icon="info" data-iconpos="left" class="ui-btn-active ui-state-persist">榜单</a></li>
+		</ul>
+		</div>
 	</div>
-	
-	<!--评论区+购买键-->
-	<div>
-	  <!--评论区-->
-	  <div>
-	  </div>
-	  <!--购买键-->
-	  <div>
-	  </div>
-	</div>
-  </div>
-  
- <!-- 尾栏--> 
-  <div data-role="footer" data-position="fixed">
-    <!--导航栏-->
-    <div data-role="navbar" >
-	   <ul>
-	     <li><a href="#page_new_items" data-icon="star"  data-iconpos="left">新品</a></li>
-		 <li><a href="#" data-icon="home" class="ui-btn-active ui-state-persist" data-iconpos="left">我的</a></li>
-		 <li><a href="#" data-icon="info" data-iconpos="left">榜单</a></li>
-	   </ul>
-	</div>
-  </div>
+</div><!--end of page_bestsales-->
+
+
+
 </div>
 
 </body> 

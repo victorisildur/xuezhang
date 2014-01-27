@@ -1,0 +1,46 @@
+.gallery {
+	margin-top: 2%;
+	background-color: white;
+}
+.comment_buy {
+	height: 180px;
+}
+
+.comment_block{
+	width: 67%;	
+	float: left;
+	display: inline;
+	margin-top: 2%;
+	background-color: #d8dfea;
+	border-bottom: 1px solid rgb(181,181,181);
+	border-top: 1px solid rgb(181,181,181);
+}
+.comment_innerblock{
+	padding-left: 5%;
+	padding-right: 2%;
+	
+}
+.comment{
+	display: block;
+}
+.comment p{
+	border-top: 1px solid rgb(171,171,171);
+	padding-top: 5px;
+	margin-left: 5px;
+	/*display:inline;*/
+	/*float:right;*/
+	
+}
+.comment img{
+	margin-right: 5px;
+	padding-top: 5px;
+	/*display:inline;*/
+	float:left;
+	position:relative;
+	left:0%;
+}
+.buy_button{
+	width: 30%;
+	float: right;
+	display:inline;
+}
