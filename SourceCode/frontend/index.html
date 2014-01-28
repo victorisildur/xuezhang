@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/gallery.css">
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script src="js/knockout-3.0.0.js"></script>
 </head>
 
 
@@ -15,80 +16,26 @@
 <div data-role="page" id="page_new" data-theme="a" >
 	<!--内容-->
 	<div data-role="content">
+		<!--test-->
 		<!--first block of exhibition-->
 		<div id="div_firstblock">
-			<a href="detail.html" data-ajax="false"><h1>小黄衫：穿上有种黄黄的感觉</h1></a>
 			<!--图片展示-->
 			<div class="gallery">
-				<tr>
-				<td><a href="detail.html" data-ajax="false"><img src="img/cloth_1.jpg" width="48%"/></a></td>
-				<td><a href="detail.html" data-ajax="false"><img src="img/cloth_2.jpg" width="48%"/></a></td>
-				</tr>
-			</div>
-			<!--评论区+购买键-->
-			<div class="comment_buy" >
-				<!--评论区-->
-				<div class="comment_block">
-					<div class="comment_innerblock">
-						<div class="comment">
-							<p><span class="user_name">我倒：</span>nice!这件不错我想要</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">剑圣：</span>黄色不错</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">莫斯科：</span>够骚</p>
-						</div>
-					</div>
-				</div>
-				<!--评论键-->
-				<div class="button_block">
-					<div class="comment_button">
-						<a href="#" data-role="button"> 评论 </a>
-					</div>
-					<!--购买键-->
-					<div class="buy_button">
-						<a href="purchase.html" data-role="button" data-ajax="false"> 购买 </a>
-					</div>
-				</div>
+				<a href="detail.html" data-ajax="false"><img src="img/grad1.jpg" width="100%"/></a>
 			</div>
 		</div>
 		<!--second block of exhibition-->
 		<div>
 			<!--图片展示-->
-			<a href="detail.html" data-ajax="false"><h1>小绿衫：穿上有种绿绿的感觉</h1></a>
 			<div class="gallery">
-				<tr>
-				<td><a href="detail.html" data-ajax="false"><img src="img/cloth_3.jpg" width="48%"/></a></td>
-				<td><a href="detail.html" data-ajax="false"><img src="img/cloth_1.jpg" width="48%"/></a></td>
-				</tr>
+				<a href="detail.html" data-ajax="false"><img src="img/jiaotong1.jpg" width="100%"/></a>
 			</div>
-			<!--评论区+购买键-->
-			<div class="comment_buy">
-				<!--评论区-->
-				<div class="comment_block">
-					<div class="comment_innerblock">
-						<div class="comment">
-							<p><span class="user_name">呼和浩特：</span>上海一所大学v5</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">娘希匹：</span>小妹妹你叫什么呀</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">微波：</span>人在塔在！</p>
-						</div>
-					</div>
-				</div>
-				<!--评论购买键-->
-				<div class="button_block">
-					<div class="comment_button">
-						<a href="#" data-role="button"> 评论 </a>
-					</div>
-					<!--购买键-->
-					<div class="buy_button">
-						<a href="purchase.html" data-role="button" data-ajax="false"> 购买 </a>
-					</div>
-				</div>
+		</div>
+		<!--second block of exhibition-->
+		<div>
+			<!--图片展示-->
+			<div class="gallery">
+				<a href="detail.html" data-ajax="false"><img src="img/batman.jpg" width="100%"/></a>
 			</div>
 		</div>
 	</div><!--end of content-->
@@ -110,49 +57,62 @@
 	<div data-role="content">
 		<!-- No.1 -->
 		<!--图片展示-->
-		<div class="bestsales_gallery">
-			<h1>No1: 2560人买过</h1>
-			<a href="detail.html" data-ajax="false"><img src="img/cloth_1.jpg"/></a>
+		<div class="detail_gallery">
+			<a href="detail.html" data-ajax="false"><img src="img/grad_top.jpg"/></a>
 		</div>
 		<!--评论区+购买键-->
 		<div class="comment_buy">
 			<!--评论区-->
-			<div class="comment_block">
-				<div class="comment_innerblock">
-					<div class="comment">
-						<p><span class="user_name">奥拉蒂伯：</span>把妹无往不利</p>
-					</div>
-					<div class="comment">
-						<p><span class="user_name">弗里曼：</span>小妹妹你几岁啦</p>
-					</div>
-					<div class="comment">
-						<p><span class="user_name">波多野结衣：</span>万花丛中过</p>
-					</div>
-				</div>
-			</div>			
+			<div class="comment">
+				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+					<li>
+						<span data-bind="text: user_name" class="user_name"> 科比 </span> :
+						<span data-bind="text: title" > 哥居然毕业了 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li>
+					<li>
+						<span data-bind="checked: isDone" class="user_name"> 娘希匹 </span> :
+						<span data-bind="value: title, disable: isDone" > 你都能毕业 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li> 
+				</ul>
+			</div>
 		</div>
 		<!-- No.2 -->
 		<!--图片展示-->
-		<div class="bestsales_gallery">
-			<h1>No2: 2047人买过</h1>
-			<a href="detail.html" data-ajax="false"><img src="img/cloth_2.jpg"/></a>
+		<div class="detail_gallery">
+			<a href="detail.html" data-ajax="false"><img src="img/jiaotong_top.jpg"/></a>
 		</div>
 		<!--评论区+购买键-->
 		<div class="comment_buy">
 			<!--评论区-->
-			<div class="comment_block">
-				<div class="comment_innerblock">
-					<div class="comment">
-						<p><span class="user_name">科比：</span>显出我的腹肌</p>
-					</div>
-					<div class="comment">
-						<p><span class="user_name">韦德：</span>瘦成一道闪电</p>
-					</div>
-					<div class="comment">
-						<p><span class="user_name">安东尼：</span>不留一点红</p>
-					</div>
-				</div>
-			</div>			
+			<div class="comment">
+				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+					<li>
+						<span data-bind="checked: isDone" class="user_name"> 韦德 </span> :
+						<span data-bind="value: title, disable: isDone" > 西南高校，但求一妹子 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li>					
+				</ul>
+			</div>
+		</div>
+		<!-- No.3 -->
+		<!--图片展示-->
+		<div class="detail_gallery">
+			<a href="detail.html" data-ajax="false"><img src="img/batman_top.jpg"/></a>
+		</div>
+		<!--评论区+购买键-->
+		<div class="comment_buy">
+			<!--评论区-->
+			<div class="comment">
+				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+					<li>
+						<span data-bind="checked: isDone" class="user_name"> 化妆 </span> :
+						<span data-bind="value: title, disable: isDone" > 穿上就高潮 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div> 
     <!-- 尾栏--> 

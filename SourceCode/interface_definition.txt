@@ -47,6 +47,7 @@
 		  {
 		    "user_name" : "乌鲁木齐" ,
 			"comment"   : "我那无悔的青春" ,
+			"comment_id": 110314a3r4f244
 			"light_count" : 198
 		  }
 		 ]

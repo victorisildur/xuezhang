@@ -3,10 +3,7 @@
 	background-color: white;
 	display: block;
 }
-.bestsales_gallery img {
-	width:70%;
-	margin-left:15%;
-}
+
 h1{
 	text-align: center;
 }
@@ -27,33 +24,32 @@ h1{
 	border-bottom: 1px solid rgb(181,181,181);
 	border-top: 1px solid rgb(181,181,181);
 }
-.comment_innerblock{
-	padding-left: 5%;
-	padding-right: 2%;	
-}
+
 .comment{
 	display: block;
 }
-.comment p{
-	border-top: 1px solid rgb(171,171,171);
-	padding-top: 5px;
-	margin-left: 5px;
+.comment li{
+	/*border-top: 1px solid rgb(171,171,171);*/
+	background-color: rgb(225,225,225);
+	padding: 2px;
+	margin: 2px;
+	border: 1px;
 	color: black;
 	font-family: 微软雅黑,宋体;
 	/*display:inline;*/
 	/*float:right;*/
 }
-p .user_name{
-	color: blue;
+.user_name{
+	font-weight: bold;
 }
 .comment img{
 	margin-right: 5px;
 	padding-top: 5px;
 	/*display:inline;*/
-	float:left;
 	position:relative;
 	left:0%;
 }
+
 .button_block{
 	width:100%;
 	padding-bottom:13%;

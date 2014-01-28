@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/gallery.css">
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script src="js/knockout-3.0.0.js"></script>
 </head>
 
 <body>
@@ -35,21 +36,23 @@
 			<!--评论区+购买键-->
 			<div class="comment_buy" >
 				<!--评论区-->
-				<div class="comment_block">
-					<div class="comment_innerblock">
-						<div class="comment">
-							<p><span class="user_name">我倒：</span>nice!这件不错我想要</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">剑圣：</span>黄色不错</p>
-						</div>
-						<div class="comment">
-							<p><span class="user_name">莫斯科：</span>够骚</p>
-						</div>
-					</div>
-				</div>
-				<!--评论键-->
+				<div class="comment">
+				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+					<li>
+						<span data-bind="text: user_name" class="user_name"> 科比 </span> :
+						<span data-bind="text: title" > 哥居然毕业了 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li>
+					<li>
+						<span data-bind="checked: isDone" class="user_name"> 娘希匹 </span> :
+						<span data-bind="value: title, disable: isDone" > 你都能毕业 </span>
+						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+					</li> 
+				</ul>
+			</div>
+				<!--评论、购买键-->
 				<div class="button_block">
+					<!--评论键-->
 					<div class="comment_button">
 						<a href="#" data-role="button"> 评论 </a>
 					</div>
@@ -70,6 +73,8 @@
 			</div>
 		</div>
 	</div>
+	<!--call for knockoutjs-->
+	<script src="js/xuezhang.js"></script>
 </body>
 
 </html>
