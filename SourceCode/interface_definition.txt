@@ -1,0 +1,74 @@
+1.概述
+	本文为xuezhangcc微信公众号0.1版接口说明
+  
+2.环境
+	测试环境：
+	生产环境：
+  
+3.接口说明
+	(1)接口返回
+	接口正常返回是指接口返回值符合预期。如：提交评论的预期结果为评论提交成功。
+	接口正常返回时都会包含一个status=’ok’ 的结点。
+	如：提交评论正确信息：{"msg":"comment upload success","status":"ok"}
+	接口未按预期返回是指接品返回值不符合预期。如：提交购买数目时传入的数目为空，导致购买失败。
+	不能返回预期结果的接口会给出一个 error结点。error中存放着错误信息，可能包含一条，也可能包含多条。
+	如：校验错误信息：{"error":"Purchase failed: Order Quantity can't be blank",”status”:” exception”}
+	
+4.接口描述
+	4.1提交评论接口
+	(1)功能说明：用户提交评论
+	(2)请求说明：post json 到后端 uploadComment()函数
+	(3)parameter:
+		key			description			must?
+		--------------------------------------
+		user_name	评论者昵称			n
+		comment		评论内容			y
+		comment_id	评论id,前端随机配   y
+	(4)return:
+	{"status":ok}
+	
+	4.2获取产品评论接口
+	(1)功能说明：获取某产品所有评论
+	(2)请求说明：post json 到后端 downloadComment()函数
+	(3)parameter:
+		key			description					must?
+		---------------------------------------------
+		count		只需要拿最亮的几个评论		n
+		goods_id	商品id						y
+	(4)return:
+		{"status" : "ok",
+		 "comments" : 
+		 [
+		  { "user_name" : "kobe" ,
+		    "comment"   : "这件够骚" ,
+			"comment_id"  : 110314a3r4f234
+			"light_count" : 200             //被亮次数，相当于知乎+1键
+		  },
+		  {
+		    "user_name" : "乌鲁木齐" ,
+			"comment"   : "我那无悔的青春" ,
+			"light_count" : 198
+		  }
+		 ]
+		}
+		 
+	4.3提交“亮”接口	 
+	(1)功能说明：给某条评论“亮一下”，提高用户评论热情，提升评论质量
+	(2)请求说明：post json 到后端 uploadComment()函数
+	(3)parameter:
+		key			description 		must?
+		-------------------------------------
+		goods_id	要亮评论对应的产品  y
+		comment_id  要亮的评论id        y
+	(4)return:
+		{"status":"ok"}
+	(5)备注：
+		怎么防止故意刷“亮”？
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
