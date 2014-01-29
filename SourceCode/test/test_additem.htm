@@ -1,0 +1,17 @@
+<head> <meta charset="UTF-8"> <title>添加商品</title> </head> 
+
+<form action="http://xuezhang.duapp.com/shop_additem.php" method="post">
+商品标题<input type="text" name="title"/><br>
+商品价格<input type="text" name="price"/><br>
+新品图片<input type="text" name="img_new"/><br>
+榜单图片<input type="text" name="img_rank"/><br>
+商品描述<input type="text" name="description"/><br>
+商品图片<input type="text" name="images"/><br>
+<input type="hidden" name="auth" value="xuezhangcc" /><br>
+<input type="submit" value="Submit" /><br>
+</form>
+<p>
+商品图片由多个图片的Url组成，Url之间用“|”分隔<br>
+比如：<br>
+http://www.baidu.com/img/bdlogo.gif|http://www.baidu.com/img/bdlogo.gif|http://www.baidu.com/img/bdlogo.gif
+</p>
