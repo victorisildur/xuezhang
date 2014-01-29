@@ -85,7 +85,7 @@
 		type	time(时间排序)或者rank(榜单排序)	y		string
 	(4)return:
 		{"status" : "ok",
-		 "goods_new" : 
+		 "goods_top" : 
 		 [
 		  { "goods_id" : 1,
 		    "img_url"   : "img/grad1.jpg" ,
