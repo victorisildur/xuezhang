@@ -82,10 +82,9 @@
 		--------------------------------------------------------------
 		num			要新获取的商品数				y		int
 		count		已有的商品数					y		int
-		type	time(时间排序)或者rank(榜单排序)	y		string
 	(4)return:
 		{"status" : "ok",
-		 "goods_top" : 
+		 "goods_new" : 
 		 [
 		  { "goods_id" : 1,
 		    "img_url"   : "img/grad1.jpg" ,
@@ -106,19 +105,18 @@
 		--------------------------------------------------------------
 		num			要新获取的商品数				y		int
 		count		已有的商品数					y		int
-		type	time(时间排序)或者rank(榜单排序)	y		string
 	(4)return:
 		{"status" : "ok",
-		 "goods_new" : 
+		 "goods_top" : 
 		 [
 		  { "goods_id" : 1,
-		    "img_top_url"   : "img/grad1.jpg" ,
+		    "img_url"   : "img/grad1.jpg" ,
 			"price" :  38,
 			"sale_num" : 142
 		  },
 		  {
 			"goods_id" : 2,
-		    "img_top_url"   : "img/jiaotong1.jpg" ,
+		    "img_url"   : "img/jiaotong1.jpg" ,
 			"price" :  38,
 			"sale_num" : 142
 		  }
