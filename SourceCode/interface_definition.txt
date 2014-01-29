@@ -74,7 +74,52 @@
 		后端通过设置cookie来控制恶意刷“亮"
 		 
 		 
-		 
+	4.4新品推荐接口
+	(1)功能说明：获取最新的几款设计
+	(2)请求说明：post参数到后端shop_lists.php?action=new页面
+	(3)parameter:
+		key			description					must		type
+		--------------------------------------------------------------
+		num			要新获取的商品数				y		int
+		count		已有的商品数					y		int
+		type	time(时间排序)或者rank(榜单排序)	y		string
+	(4)return:
+		{"status" : "ok",
+		 "goods_new" : 
+		 [
+		  { "goods_id" : 1,
+		    "img_url"   : "img/grad1.jpg" ,
+		  },
+		  {
+			"goods_id" : 2,
+		    "img_url"   : "img/jiaotong1.jpg" ,
+		  }
+		 ]
+		}
+		{"status":"fail", "msg":"没有了~"}
+	4.5榜单接口
+	(1)功能说明：获取最新的几款设计
+	(2)请求说明：post参数到后端shop_lists.php?action=rank页面
+	(3)parameter:
+		key			description					must		type
+		--------------------------------------------------------------
+		num			要新获取的商品数				y		int
+		count		已有的商品数					y		int
+		type	time(时间排序)或者rank(榜单排序)	y		string
+	(4)return:
+		{"status" : "ok",
+		 "goods_new" : 
+		 [
+		  { "goods_id" : 1,
+		    "img_url"   : "img/grad1.jpg" ,
+		  },
+		  {
+			"goods_id" : 2,
+		    "img_url"   : "img/jiaotong1.jpg" ,
+		  }
+		 ]
+		}
+		{"status":"fail", "msg":"没有了~"}
 		 
 		 
 		 
