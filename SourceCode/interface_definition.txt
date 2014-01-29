@@ -97,8 +97,9 @@
 		 ]
 		}
 		{"status":"fail", "msg":"没有了~"}
+	
 	4.5榜单接口
-	(1)功能说明：获取最新的几款设计
+	(1)功能说明：获取销量最高的几款设计
 	(2)请求说明：post参数到后端shop_lists.php?action=rank页面
 	(3)parameter:
 		key			description					must		type
@@ -111,13 +112,45 @@
 		 "goods_new" : 
 		 [
 		  { "goods_id" : 1,
-		    "img_url"   : "img/grad1.jpg" ,
+		    "img_top_url"   : "img/grad1.jpg" ,
+			"price" :  38,
+			"sale_num" : 142
 		  },
 		  {
 			"goods_id" : 2,
-		    "img_url"   : "img/jiaotong1.jpg" ,
+		    "img_top_url"   : "img/jiaotong1.jpg" ,
+			"price" :  38,
+			"sale_num" : 142
 		  }
 		 ]
+		}
+		{"status":"fail", "msg":"没有了~"}
+		
+	4.6商品详情接口
+	(1)功能说明：获取款设计
+	(2)请求说明：post参数到后端details.php?action=detail页面
+	(3)parameter:
+		key			description						must		type
+		--------------------------------------------------------------
+		goods_id	要新获取的商品id				y			int
+		
+	(4)return:
+		{"status" : "ok",
+		 "img_detail" : 
+		 [
+		  { "img_detail_url" : "img/jiaotong1.jpg"
+		  },
+		  { "img_detail_url" : "img/jiaotong2.jpg"
+		  },
+		  { "img_detail_url" : "img/jiaotong3.jpg"
+		  },
+		  { "img_detail_url" : "img/jiaotong4.jpg"
+		  },
+		 ],
+		 "price" : 38,
+		 "sale_num" : 263,
+		 "title" : "毕业，那一年"
+		 "description" : "这款黑色略掉色，请不要与淡色衣物混洗。近期缺货，4.14日第二批到货。非常非常屌，我们的供货商质量真是吓了我们一跳"
 		}
 		{"status":"fail", "msg":"没有了~"}
 		 
