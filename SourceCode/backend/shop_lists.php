@@ -6,26 +6,21 @@ require_once('database_class.php');
 header("Access-Control-Allow-Origin: *");
 
 $action = trim($_GET['action']);
+$count = empty($_POST['count'])? 0 : intval($_POST['count']);
+$num = empty($_POST['num'])? 5 : intval($_POST['num']);
 
 $conn = new DBClass();
-
-$result = $conn->query("SELECT `goods_id`, `img_new` FROM `shop_goods` ORDER BY $method DEC LIMIT $count,$num");
-
 
 switch ($action)
 {
 case 'new':
-	$count = empty($_POST['count'])? 0 : intval($_POST['count']);
-	$num = empty($_POST['num'])? 5 : intval($_POST['num']);
-	$result = $conn->query("SELECT `goods_id`, `img_new` FROM `shop_goods` ORDER BY `add_time` DEC LIMIT $count,$num");
-	if($result)	echo genNewLists($result['goods_id'], $result['img_new']);
+	$result = $conn->query("SELECT `goods_id`, `img_new` FROM `shop_goods` ORDER BY `add_time` DESC LIMIT $count,$num");
+	if($result)	echo genNewLists($result);
 	else echo json_encode(array('status'=>'fail'));	
 	die();
 case 'rank':
-	$count = empty($_POST['count'])? 0 : intval($_POST['count']);
-	$num = empty($_POST['num'])? 5 : intval($_POST['num']);
-	$result = $conn->query("SELECT `goods_id`, `img_rank`, `price`, `sale_num` FROM `shop_goods` ORDER BY `sale_num` DEC LIMIT $count,$num");
-	if($result)	echo genRankLists($result['goods_id'], $result['img_rank'], $result['price'], $result['sale_num']);
+	$result = $conn->query("SELECT `goods_id`, `img_rank`, `price`, `sale_num` FROM `shop_goods` ORDER BY `sale_num` DESC LIMIT $count,$num");
+	if($result)	echo genRankLists($result);
 	else echo json_encode(array('status'=>'fail'));	
 	die();
 default:
@@ -33,32 +28,30 @@ default:
 	break;
 }
 
-function genNewLists($goods_id, $img_url)
+function genNewLists($query)
 {
 	$data = array();
-	$num = count($goods_id);
-	for($i=0; $i<$num; $i++)
+	while($result=mysql_fetch_array($query))
 	{
 		$item = array(
-					'goods_id'=>$goods_id[$i],
-					"img_url"=>$img_url[$i]);
+					'goods_id'=>$result['goods_id'],
+					"img_url"=>$result['img_new']);
 		$data[] = $item;
 	}
 	$info = array('status'=>'ok',
 				  'goods_new'=>$data);
 	return json_encode($info);
 }
-function genRankLists($goods_id, $img_url, $price, $sale_num)
+function genRankLists($query)
 {
 	$data = array();
-	$num = count($goods_id);
-	for($i=0; $i<$num; $i++)
+	while($result=mysql_fetch_array($query))
 	{
 		$item = array(
-					'goods_id'=>$goods_id[$i],
-					"img_url"=>$img_url[$i]);
-					"price"=>$price[$i]);
-					"sale_num"=>$sale_num[$i]);
+					'goods_id'=>$result['goods_id'],
+					"img_url"=>$result['img_rank'],
+					"price"=>$result['price'],
+					"sale_num"=>$result['sale_num']);
 		$data[] = $item;
 	}
 	$info = array('status'=>'ok',

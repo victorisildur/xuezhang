@@ -15,7 +15,8 @@ case 'submit':
 	$content = $conn->sqlesc($_POST['comment']);
 	$time = time();
 	$ip = getip();
-	if($conn->query("INSERT INTO `shop_comments` (`goods_id`, `nick_name`, `content`, `add_time`, `ip_address`) VALUES ($goods_id, '$nick_name', '$content',$time, '$ip')")) echo json_encode(array('status'=>'ok'));
+	//echo "INSERT INTO `shop_comments` (`goods_id`, `nick_name`, `content`, `add_time`, `ip_address`) VALUES ($goods_id, $nick_name, $content,$time, '$ip')";
+	if($conn->query("INSERT INTO `shop_comments` (`goods_id`, `nick_name`, `content`, `add_time`, `ip_address`) VALUES ($goods_id, $nick_name, $content,$time, '$ip')")) echo json_encode(array('status'=>'ok'));
 	else echo json_encode(array('status'=>'fail'));
 	die();
 case 'get':
@@ -24,35 +25,35 @@ case 'get':
 	$num = empty($_POST['num'])? 5 : intval($_POST['num']);
 	$type = trim($_POST['type']);
 	$method = $type=='time' ? '`add_time`' : '`comment_rank`';
-	$result = $conn->query("SELECT `nick_name`, `content`, `comment_id`, `comment_rank` FROM `shop_comments` WHERE `goods_id` = $goods_id ORDER BY $method DEC LIMIT $count,$num");
-	if($result)	echo genComments($result['nick_name'], $result['content'], $result['comment_id'], $result['comment_rank']);
-	else echo json_encode(array('status'=>'fail'));		  
+	//echo "SELECT `nick_name`, `content`, `comment_id`, `comment_rank` FROM `shop_comments` WHERE `goods_id` = $goods_id ORDER BY $method DESC LIMIT $count,$num";
+	$query = $conn->query("SELECT `nick_name`, `content`, `comment_id`, `comment_rank` FROM `shop_comments` WHERE `goods_id` = $goods_id ORDER BY $method DESC LIMIT $count,$num");
+	if(!$query)
+	{
+		echo json_encode(array('status'=>'fail'));
+	}
+	else{
+		$data = array();
+		while($result=mysql_fetch_array($query))
+		{
+			$item = array(
+						'user_name'=>$result['nick_name'],
+						"comment"=>$result['content'],
+						"comment_id"=>$result['comment_id'],
+						"light_count"=>$result['comment_rank']);
+			$data[] = $item;
+		}
+		$info = array('status'=>'ok',
+					  'comments'=>$data);
+		echo json_encode($info);
+	}
 	die();
 case 'rank':
 	$comment_id = intval($_POST['comment_id']);
+	//echo "UPDATE `shop_comments` SET `comment_rank` = `comment_rank` + 1 WHERE `comment_id` = $comment_id";
 	if($conn->query("UPDATE `shop_comments` SET `comment_rank` = `comment_rank` + 1 WHERE `comment_id` = $comment_id")) echo json_encode(array('status'=>'ok'));
 	else echo json_encode(array('status'=>'fail'));
 	die();
 default:
 	echo json_encode(array('status'=>'fail'));
 	die();
-}
-
-
-function genComments($user_name, $comment, $comment_id, $light_count)
-{
-	$data = array();
-	$num = count($comment_id);
-	for($i=0; $i<$num; $i++)
-	{
-		$item = array(
-					'user_name'=>$user_name[$i],
-					"comment"=>$comment[$i],
-					"comment_id"=>$comment_id[$i],
-					"light_count"=>$light_count[$i]);
-		$data[] = $item;
-	}
-	$info = array('status'=>'ok',
-				  'comments'=>$data);
-	return json_encode($info);
 }
