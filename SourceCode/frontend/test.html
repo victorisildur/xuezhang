@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script src="js/knockout-3.0.0.js"></script>
+</head>
+
+<body>
+	<!--接口测试-->
+	<div>
+		<p id="test_paragraph"> test html</p>
+		
+		<!--返回是否正确测试-->
+		<p data-bind="text:status"></p>
+		
+		<!--评论获取测试-->
+		<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
+			<li>
+				<span data-bind="text: user_name" class="user_name"> </span> :
+				<span data-bind="text: comment" >  </span>
+				<a href="#"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</a>
+			</li>
+		</ul>
+		
+	</div>
+	
+	<input type="button" value="testtestbutton" onclick="postHeiHei()">
+	
+	<script src="js/comment.js"></script>
+</body>
+
+</html>

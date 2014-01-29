@@ -1,20 +1,29 @@
-//Model of Comment,也就是数据
-function Comment(data) {
-    this.user_name = ko.observable(data.user_name);
-	this.comment = ko.observable(data.comment);
-    this.comment_id = ko.observable(data.comment_id);
-	this.light_count = ko.observable(data.light_count);
+//comment bind
+function Comments(data) {
+	this.status = data.status;
+	this.user_name = data.user_name;
+	this.comment = data.comment;
+	this.light_count = data.light_count;
 }
 
-
-//获取评论json
 function CommentViewModel(){
-	
-	//fetch data from server
-	$.getJSON("/backend_url", function(allData) {
-        var mappedComment = $.map(allData, function(item) { return new Comment(item) });
-        self.tasks(mappedComment);
-    }); 
+	var self = this;
+	self.comments = ko.observableArray([]);
+		
+	 $.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
+	{"gid":2,
+	 "num":5,
+	 "count":0,
+	 "type":"rank"
+	},
+	function(data) {
+        // Update view model properties
+		if( data.status == 'ok')
+		{		
+			var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+			self.comments(mappedComments);
+		}
+    },"json");  
 }
-
-ko.applyBindings(new CommentsViewModel());
+//bind
+ko.applyBindings(new CommentViewModel());

@@ -55,63 +55,27 @@
 <div data-role="page" id="page_bestsales" data-theme="a">
 	<!--内容-->
 	<div data-role="content">
-		<!-- No.1 -->
-		<!--图片展示-->
-		<div class="detail_gallery">
-			<a href="detail.html" data-ajax="false"><img src="img/grad_top.jpg"/></a>
+		<!--图片区-->
+		<div class="detail_gallery" >
+			<ul style="list-style-type: none" data-bind="foreach : goods_top , visible:goods_top().length > 0">
+				<li>
+					<a href="detail.html" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
+				</li>
+			<ul>
 		</div>
-		<!--评论区+购买键-->
+		<!--评论区-->
 		<div class="comment_buy">
-			<!--评论区-->
+			<!--评论-->
 			<div class="comment">
-				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
+				<!--
+				<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
 					<li>
-						<span data-bind="text: user_name" class="user_name"> 科比 </span> :
-						<span data-bind="text: title" > 哥居然毕业了 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
-					</li>
-					<li>
-						<span data-bind="checked: isDone" class="user_name"> 娘希匹 </span> :
-						<span data-bind="value: title, disable: isDone" > 你都能毕业 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
-					</li> 
-				</ul>
-			</div>
-		</div>
-		<!-- No.2 -->
-		<!--图片展示-->
-		<div class="detail_gallery">
-			<a href="detail.html" data-ajax="false"><img src="img/jiaotong_top.jpg"/></a>
-		</div>
-		<!--评论区+购买键-->
-		<div class="comment_buy">
-			<!--评论区-->
-			<div class="comment">
-				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
-					<li>
-						<span data-bind="checked: isDone" class="user_name"> 韦德 </span> :
-						<span data-bind="value: title, disable: isDone" > 西南高校，但求一妹子 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
-					</li>					
-				</ul>
-			</div>
-		</div>
-		<!-- No.3 -->
-		<!--图片展示-->
-		<div class="detail_gallery">
-			<a href="detail.html" data-ajax="false"><img src="img/batman_top.jpg"/></a>
-		</div>
-		<!--评论区+购买键-->
-		<div class="comment_buy">
-			<!--评论区-->
-			<div class="comment">
-				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
-					<li>
-						<span data-bind="checked: isDone" class="user_name"> 化妆 </span> :
-						<span data-bind="value: title, disable: isDone" > 穿上就高潮 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
+						<span data-bind="text: user_name" class="user_name"> </span> :
+						<span data-bind="text: comment" >  </span>
+						<a href="#"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</a>
 					</li>
 				</ul>
+				-->
 			</div>
 		</div>
 	</div> 
@@ -127,5 +91,11 @@
 	</div>
 </div><!--end of page_bestsales-->
 
+<script src="js/goods_top_test.js"></script>
+<!--<script src="js/comment.js"></script>-->
+  
+
+
 </body> 
+
 </html>

@@ -15,18 +15,12 @@ h1{
 	margin-bottom: 10%;
 }
 
-.comment_block{
-	width: 100%;	
-	/*float: left;*/
-	/*display: inline;*/
-	margin-top:2%;
-	background-color: rgb(245,245,245);
-	border-bottom: 1px solid rgb(181,181,181);
-	border-top: 1px solid rgb(181,181,181);
-}
-
 .comment{
 	display: block;
+}
+.comment ul{
+	list-style-type: none;
+	padding: 0px;
 }
 .comment li{
 	/*border-top: 1px solid rgb(171,171,171);*/
@@ -36,18 +30,18 @@ h1{
 	border: 1px;
 	color: black;
 	font-family: 微软雅黑,宋体;
+	font-size: small;
 	/*display:inline;*/
 	/*float:right;*/
-}
-.user_name{
-	font-weight: bold;
 }
 .comment img{
 	margin-right: 5px;
 	padding-top: 5px;
 	/*display:inline;*/
-	position:relative;
-	left:0%;
+}
+
+.user_name{
+	font-weight: bold;
 }
 
 .button_block{

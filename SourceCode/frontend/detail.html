@@ -17,11 +17,24 @@
 		</div>
 		
 		<div data-role="content">
-			
+			<!--顶部大图-->
+			<div class = detail_gallery>
+				<img src="img/zheda4.jpg"/>
+			</div>
+			<p style="float:center">仅售：38.00</p>
+			<p style="float:center">已售：246件</p>
+			<!--购买键-->
+			<div class="button_block">
+				<!--购买键-->
+				<div class="buy_button">
+					<a href="purchase.html" data-role="button" data-ajax="false" style="float:center"> 购买 </a>
+				</div>
+			</div>
 			<!--尺码、配送说明-->
 			<div>
 				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
 				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
+				<p><span style="color:red">特别通知：</span>卖光啦！下一批4.14到货，亲们不要着急哦</p>
 				<p>尺码对照表：</p>
 				<img src="img/size_table.jpg" width="100%"/>
 			</div>
@@ -37,19 +50,14 @@
 			<div class="comment_buy" >
 				<!--评论区-->
 				<div class="comment">
-				<ul data-bind="foreach: tasks, visible: tasks().length > 0">
-					<li>
-						<span data-bind="text: user_name" class="user_name"> 科比 </span> :
-						<span data-bind="text: title" > 哥居然毕业了 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
-					</li>
-					<li>
-						<span data-bind="checked: isDone" class="user_name"> 娘希匹 </span> :
-						<span data-bind="value: title, disable: isDone" > 你都能毕业 </span>
-						<a href="#" data-bind="click: $parent.removeTask" ><img src="img/light_small.png"/>亮了（<span data-bind="value: light_count">132</span>）</a>
-					</li> 
-				</ul>
-			</div>
+					<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
+						<li>
+						<span data-bind="text: user_name" class="user_name"> </span> :
+						<span data-bind="text: comment" >  </span>
+						<a href="#"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</a>
+						</li>
+					</ul>
+				</div>
 				<!--评论、购买键-->
 				<div class="button_block">
 					<!--评论键-->
@@ -58,7 +66,7 @@
 					</div>
 					<!--购买键-->
 					<div class="buy_button">
-						<a href="#" data-role="button"> 购买 </a>
+						<a href="purchase.html" data-role="button" data-ajax="false"> 购买 </a>
 					</div>
 				</div>
 			</div>
@@ -74,7 +82,7 @@
 		</div>
 	</div>
 	<!--call for knockoutjs-->
-	<script src="js/xuezhang.js"></script>
+	<<script src="js/comment.js"></script>
 </body>
 
 </html>
