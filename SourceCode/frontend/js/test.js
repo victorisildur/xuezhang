@@ -35,6 +35,7 @@ function CommentViewModel(){
     },"json"); 
 	
 	//定时获取评论
+	/*
 	$("body").everyTime("5s", function() {
 	//获取评论
 	 $.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
@@ -51,6 +52,7 @@ function CommentViewModel(){
 		}
     },"json");  
 	});
+	*/
 	
 	//提交评论
 	self.submitComment = function() {  
@@ -101,7 +103,7 @@ function CommentViewModel(){
 			
 		},"json");
 		//修改本地亮数
-		
+		/*
 			//func_this = comment[x],已经取出light_count值啦
 			var light_count = parseInt(func_this.light_count);
 			console.log("comments[x].light_count:" + light_count);
@@ -114,7 +116,22 @@ function CommentViewModel(){
 					"user_name":func_this.user_name,
 					"comment":func_this.comment,
 					"comment_id":func_this.comment,
-					"light_count":light_count_plus});	
+					"light_count":light_count_plus});
+		*/				
+		//请求更新
+		$.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
+		{"gid":1,
+		 "num":5,
+		 "count":0,
+		 "type":"rank"
+		},
+		function(data) {
+			// Update view model properties
+			if( data.status == 'ok') {	
+				var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+				self.comments(mappedComments);
+			}
+		},"json"); 
 	};
 	
 	//获取榜单

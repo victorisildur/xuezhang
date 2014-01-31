@@ -3,10 +3,10 @@ function Details(data) {
 }
 
 function Comments(data) {
-	this.status = data.status;
 	this.user_name = data.user_name;
 	this.comment = data.comment;
 	this.light_count = data.light_count;
+	this.comment_id = data.comment_id;	
 }
 
 function DetailViewModel(){
@@ -89,29 +89,31 @@ function DetailViewModel(){
     };
 	
 	//亮了
+	//提交亮了
+		//提交亮了
 	self.lightComment = function() {
 		var func_this = this;
 		//修改后端亮数
 		$.post("http://xuezhang.duapp.com/shop_comments.php?action=rank",
 		{"comment_id":func_this.comment_id}, 
 		function(data){
-			
-		},"json");
-		//修改本地亮数
-		
-			//func_this = comment[x],已经取出light_count值啦
-			var light_count = parseInt(func_this.light_count);
-			console.log("comments[x].light_count:" + light_count);
-			
-			var light_count_plus = light_count+1;
-			console.log("light_count+1="+light_count_plus);
-			
-			//添加新项
-			self.comments.unshift({
-					"user_name":func_this.user_name,
-					"comment":func_this.comment,
-					"comment_id":func_this.comment,
-					"light_count":light_count_plus});	
+			if(data.status == 'ok') {
+				//请求更新
+				$.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
+				{"gid":1,
+				 "num":5,
+				 "count":0,
+				 "type":"rank"
+				},
+				function(data) {
+					// Update view model properties
+					if( data.status == 'ok') {	
+						var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+						self.comments(mappedComments);
+					}
+				},"json"); 
+			}
+		},"json");	
 	};
 }
 
