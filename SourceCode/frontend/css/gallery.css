@@ -39,6 +39,10 @@ h1{
 	padding-top: 5px;
 	/*display:inline;*/
 }
+.comment button{
+	position:relative;
+	left:2%;
+}
 
 .user_name{
 	font-weight: bold;
