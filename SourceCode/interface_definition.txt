@@ -37,9 +37,7 @@
 		gid				商品id			   			y		int
 		num			要新获取的评论数				y		int
 		count		已有的评论数					y		int
-		type	time(时间排序)或者rank(点赞排序)	y		string
-
-		
+		type	time(时间排序)或者rank(点赞排序)	y		string		
 	(4)return:
 		{"status" : "ok",
 		 "comments" : 
@@ -86,11 +84,11 @@
 		{"status" : "ok",
 		 "goods_new" : 
 		 [
-		  { "goods_id" : 1,
+		  { "gid" : 1,
 		    "img_url"   : "img/grad1.jpg" ,
 		  },
 		  {
-			"goods_id" : 2,
+			"gid" : 2,
 		    "img_url"   : "img/jiaotong1.jpg" ,
 		  }
 		 ]
@@ -109,13 +107,13 @@
 		{"status" : "ok",
 		 "goods_top" : 
 		 [
-		  { "goods_id" : 1,
+		  { "gid" : 1,
 		    "img_url"   : "img/grad1.jpg" ,
 			"price" :  38,
 			"sale_num" : 142
 		  },
 		  {
-			"goods_id" : 2,
+			"gid" : 2,
 		    "img_url"   : "img/jiaotong1.jpg" ,
 			"price" :  38,
 			"sale_num" : 142
@@ -130,19 +128,18 @@
 	(3)parameter:
 		key			description						must		type
 		--------------------------------------------------------------
-		goods_id	要新获取的商品id				y			int
-		
+		gid	要新获取的商品id				y			int		
 	(4)return:
 		{"status" : "ok",
-		 "img_detail" : 
+		 "goods_detail" : 
 		 [
-		  { "img_detail_url" : "img/jiaotong1.jpg"
+		  { "img_url" : "img/jiaotong1.jpg"
 		  },
-		  { "img_detail_url" : "img/jiaotong2.jpg"
+		  { "img_url" : "img/jiaotong2.jpg"
 		  },
-		  { "img_detail_url" : "img/jiaotong3.jpg"
+		  { "img_url" : "img/jiaotong3.jpg"
 		  },
-		  { "img_detail_url" : "img/jiaotong4.jpg"
+		  { "img_url" : "img/jiaotong4.jpg"
 		  },
 		 ],
 		 "price" : 38,
