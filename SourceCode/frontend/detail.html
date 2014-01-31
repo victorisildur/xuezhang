@@ -34,7 +34,7 @@
 			<input id="gid_holder" value="gid holder" style="display:none"/>
 			<!--顶部大图-->
 			<div class = detail_gallery>
-				<img src="img/zheda4.jpg"/>
+				<img />
 			</div>
 			<p style="float:center">仅售：38.00</p>
 			<p style="float:center">已售：246件</p>
@@ -49,17 +49,18 @@
 			<div>
 				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
 				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
-				<p><span style="color:red">特别通知：</span>卖光啦！下一批4.14到货，亲们不要着急哦</p>
+				<span style="color:red">特别通知：</span><p data-bind="text:description"></p>
 				<p>尺码对照表：</p>
 				<img src="img/size_table.jpg" width="100%"/>
 			</div>
 			<!--图片展示-->
 			<div class = detail_gallery>
-				<img src="img/zheda4.jpg"/>
-				<img src="img/zheda5.jpg"/>
-				<img src="img/zheda1.jpg"/>
-				<img src="img/zheda2.jpg"/>
-				<img src="img/zheda3.jpg"/>
+				<ul style="list-style-type: none" data-bind="foreach : detailImgs , visible:detailImgs().length > 0">
+					<li>
+						<!--图片-->
+						<img data-bind="attr:{src: img_url}"/>
+					</li>
+				<ul>
 			</div>
 			<!--评论区+购买键-->
 			<div class="comment_buy" >
@@ -72,7 +73,7 @@
 						<form data-bind="submit: $parent.lightComment" style="display:inline" ><!--this域问题！-->
 							<button type="submit"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>
 						</form>						
-						<p data-bind="text: comment" >  </p>
+						<p data-bind="text:comment" >  </p>
 						</li>
 					</ul>
 				</div>
@@ -86,7 +87,7 @@
 				</div>
 				<!--购买键-->
 				<div >
-					<a href="purchase.html" data-role="button" data-ajax="false"> 购买 </a>
+					<a data-bind="attr:{href: 'purchase.html?' + gid}" data-ajax="false">购买</a>
 				</div>
 			</div>
 		</div>
@@ -101,7 +102,7 @@
 		</div>
 	</div>
 	<!--call for knockoutjs-->
-	<<script src="js/comment.js"></script>
+	<<script src="js/detail.js"></script>
 </body>
 
 </html>

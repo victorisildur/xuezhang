@@ -15,7 +15,7 @@ function GoodsTop(data) {
 
 function CommentViewModel(){
 	var self = this;
-	self.comments = ko.observableArray([]);
+	self.comments = ko.observableArray([{"user_name":"柳絮","comment":"ab","light_count":2,"comment_id":55}]);	
 	self.newUserName = ko.observable();
 	self.newCommentText = ko.observable();
 	
@@ -24,30 +24,28 @@ function CommentViewModel(){
 	{"gid":1,
 	 "num":5,
 	 "count":0,
-	 "type":"time"
+	 "type":"rank"
 	},
 	function(data) {
         // Update view model properties
-		if( data.status == 'ok')
-		{		
+		if( data.status == 'ok') {	
 			var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
 			self.comments(mappedComments);
 		}
     },"json"); 
 	
 	//定时获取评论
-	$("body").everyTime("10s", function() {
+	$("body").everyTime("5s", function() {
 	//获取评论
 	 $.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
 	{"gid":1,
 	 "num":5,
 	 "count":0,
-	 "type":"time"
+	 "type":"rank"
 	},
 	function(data) {
         // Update view model properties
-		if( data.status == 'ok')
-		{		
+		if( data.status == 'ok') {		
 			var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
 			self.comments(mappedComments);
 		}
@@ -80,40 +78,43 @@ function CommentViewModel(){
 		self.newCommentText("");
     };
 	
+	//数组comments操作测试
+	//var temp = self.comments.spice(0,1).user_name;
+	//console.log("outer:" + temp);
+	$("body").everyTime("3s", function() {
+		//push没问题
+		//self.comments.unshift({"user_name":"柳絮","comment":"ab","light_count":2,"comment_id":55});
+		//slice有问题！
+		//var temp = self.comments.slice(0,1);
+		//var temp1 = self.comments.indexOf(temp);
+		//console.log("user_name:"+temp1);
+		//self.comments.splice(0,1);
+	});
+	
 	//亮一个本地化,未完成
-		self.lightComment = function() {
+	self.lightComment = function() {
 		var func_this = this;
-		var is_lighted = 0;
+		//修改后端亮数
 		$.post("http://xuezhang.duapp.com/shop_comments.php?action=rank",
 		{"comment_id":func_this.comment_id}, 
 		function(data){
-			if( data.status == 'ok')
-			{					
-				//让亮了立即+1
-				//一定要吧这一条Comments.light_count改掉
-				is_lighted = 1;
-				console.log("light is ok");
-				console.log("is_lighted:"+is_lighted);
-			}
+			
 		},"json");
-		console.log("is_light == 1");
-		var temp1 = self.comments.slice(1,2).user_name;
-		var temp2 = temp1.user_name;
-		var temp3 = self.comments.slice(1,2).join();
-		var temp4 = self.comments.toString();
-		console.log("comments[0].user_name:" + temp1);
+		//修改本地亮数
 		
-		for(var i=0; self.comments[i] != null; i++) {
-			console.log(i);
-			if(self.comments[i].comment_id == func_this.comment_id) {
-				console.log("comment_id found");
-				//替换数组第i项
-				self.comments.splice(i,1,{"user_name":func_this.user_name,
+			//func_this = comment[x],已经取出light_count值啦
+			var light_count = parseInt(func_this.light_count);
+			console.log("comments[x].light_count:" + light_count);
+			
+			var light_count_plus = light_count+1;
+			console.log("light_count+1="+light_count_plus);
+			
+			//添加新项
+			self.comments.unshift({
+					"user_name":func_this.user_name,
 					"comment":func_this.comment,
 					"comment_id":func_this.comment,
-					"light_count":func_this.light_count+1});
-			}
-		}; 
+					"light_count":light_count_plus});	
 	};
 	
 	//获取榜单
@@ -135,7 +136,7 @@ function CommentViewModel(){
 		{
 			console.log(data.msg);
 		}
-	},"json"	);
+	},"json");
 }
 
 //bind

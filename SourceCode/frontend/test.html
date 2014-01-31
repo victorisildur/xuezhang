@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width,  initial-scale=1"> 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css">
   <link rel="stylesheet" href="css/gallery.css">
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="js/jquery.mobile-1.4.0.min.js"></script>
@@ -20,18 +20,21 @@
 		<p data-bind="text:status"></p>
 		
 		<!--评论获取测试-->
-		<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
-			<li>
-				<span data-bind="text: user_name" class="user_name"> </span> :
-				<span data-bind="text: comment" >  </span>
-				<span data-bind="text: comment_id" >  </span>
-				<!--亮了测试-->
-				<form data-bind="submit: $parent.lightComment" style="display:inline"><!--this域问题！-->
-					<button type="submit"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>
-				</form>
-				
-			</li>
-		</ul>
+		<div class="comment_buy">
+			<!--评论-->
+			<div class="comment">
+				<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
+					<li>
+						<span data-bind="text: user_name" class="user_name"> </span> 
+						<!--亮了-->
+						<form data-bind="submit: $parent.lightComment" style="display:inline" ><!--this域问题！-->
+							<button type="submit"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>
+						</form>						
+						<p data-bind="text: comment" >  </p>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 		
 		<!--评论提交测试-->

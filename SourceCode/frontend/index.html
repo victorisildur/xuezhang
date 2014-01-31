@@ -19,24 +19,15 @@
 	<div data-role="content">
 		<!--test-->
 		<!--first block of exhibition-->
-		<div id="div_firstblock">
-			<!--图片展示-->
-			<div class="gallery">
-				<a href="detail.html" data-ajax="false"><img src="img/grad1.jpg" width="100%"/></a>
-			</div>
-		</div>
-		<!--second block of exhibition-->
-		<div> 
-			<!--图片展示-->
-			<div class="gallery">
-				<a href="detail.html" data-ajax="false"><img src="img/jiaotong1.jpg" width="100%"/></a>
-			</div>
-		</div>
-		<!--second block of exhibition-->
 		<div>
 			<!--图片展示-->
 			<div class="gallery">
-				<a href="detail.html" data-ajax="false"><img src="img/batman.jpg" width="100%"/></a>
+				<ul style="list-style-type: none" data-bind="foreach : goods_new , visible: goods_new().length > 0">
+					<li>
+						<!--图片-->
+						<a data-bind="attr:{href: 'detail.html?'+gid}" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
+					</li>
+				<ul>
 			</div>
 		</div>
 	</div><!--end of content-->
@@ -61,7 +52,7 @@
 			<ul style="list-style-type: none" data-bind="foreach : goods_top , visible:goods_top().length > 0">
 				<li>
 					<!--图片-->
-					<a data-bind="attr:{href: 'detail.html?'+goods_id}" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
+					<a data-bind="attr:{href: 'detail.html?'+gid}" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
 					<!--销量，售价-->
 					已售：<span data-bind="text:sale_num"></span>
 					售价：<span data-bind="text:price"></span>
@@ -97,7 +88,7 @@
 	</div>
 </div><!--end of page_bestsales-->
 
-<script src="js/goods_top_test.js"></script>
+<script src="js/main_page.js"></script>
   
 
 
