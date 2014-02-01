@@ -29,13 +29,9 @@ $fileUpload = $_FILES['file']["tmp_name"];
 $opt = array ();
 $opt ['acl'] = "public-read";
 $response = $baidu_bcs->create_object ( $bucket, $object, $fileUpload );
-printResponse ( $response );
+if($response->isOK ()) echo 'Image Url: http://bcs.duapp.com/xuezhang/'.$object;
+else echo 'Failed';
 
-
-function printResponse($response) {
-	if($response->isOK ()) echo 'Image Url: http://bcs.duapp.com/xuezhang/'.$object;
-	else echo 'Failed';
-}
 ?>
 
 </body>

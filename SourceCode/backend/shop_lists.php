@@ -34,7 +34,7 @@ function genNewLists($query)
 	while($result=mysql_fetch_array($query))
 	{
 		$item = array(
-					'goods_id'=>$result['goods_id'],
+					'gid'=>$result['goods_id'],
 					"img_url"=>$result['img_new']);
 		$data[] = $item;
 	}
@@ -48,7 +48,7 @@ function genRankLists($query)
 	while($result=mysql_fetch_array($query))
 	{
 		$item = array(
-					'goods_id'=>$result['goods_id'],
+					'gid'=>$result['goods_id'],
 					"img_url"=>$result['img_rank'],
 					"price"=>$result['price'],
 					"sale_num"=>$result['sale_num']);
