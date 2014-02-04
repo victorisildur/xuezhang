@@ -167,17 +167,21 @@
 			<input name='order[]' value='g|xl|2'>
 			
 	(3')parameter:
-		key			description						must		type
-		--------------------------------------------------------------
+		key			description						must		type    	备注
+		------------------------------------------------------------------------
 		gid	    	要购买的商品id			    	y			int		
 		name		姓名							y			string
 		phone		联系电话						y			string
-		order		订单详情						y			string
+		addr		送货地址						y  			string
+		time		送货时间						y			string		6,8,10.数字指起送时间(p.m.)
+		order		订单详情						y			string		数组
 		如：
 		{ "gid" : 1,
-		  "name" : 谭柳柳,
-		  "phone" : 12345678901,
-		  "order" :
+		  "name" : "谭柳柳",
+		  "phone" : "12345678901",
+		  "addr"  : "西53",
+		  "time"  : "6"
+		  "order" : 
 		  [
 			{ "color" : "white",
 			  "size" : "xl",
