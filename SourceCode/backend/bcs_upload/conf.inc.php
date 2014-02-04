@@ -1,8 +1,8 @@
 <?php
 //AK 公钥
-define ( 'BCS_AK', '' );
+define ( 'BCS_AK', 'DkdnqXavvTUpgWxhAlfADlAr' );
 //SK 私钥
-define ( 'BCS_SK', '' );
+define ( 'BCS_SK', 'CV52cYDi8DcXoNljDUxqGgGYKj2Aj47W' );
 //superfile 每个object分片后缀
 define ( 'BCS_SUPERFILE_POSTFIX', '_bcs_superfile_' );
 //sdk superfile分片大小 ，单位 B（字节）

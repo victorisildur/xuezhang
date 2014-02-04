@@ -124,7 +124,7 @@
 		
 	4.6商品详情接口
 	(1)功能说明：获取款设计
-	(2)请求说明：post参数到后端details.php?action=detail页面
+	(2)请求说明：post参数到后端shop_detail.php?action=detail页面
 	(3)parameter:
 		key			description						must		type
 		--------------------------------------------------------------
@@ -165,3 +165,31 @@
 			<input name='order[]' value='w|xl|2'>
 			<input name='order[]' value='b|xl|1'>
 			<input name='order[]' value='g|xl|2'>
+			
+	(3')parameter:
+		key			description						must		type
+		--------------------------------------------------------------
+		gid	    	要购买的商品id			    	y			int		
+		name		姓名							y			string
+		phone		联系电话						y			string
+		order		订单详情						y			string
+		如：
+		{ "gid" : 1,
+		  "name" : 谭柳柳,
+		  "phone" : 12345678901,
+		  "order" :
+		  [
+			{ "color" : "white",
+			  "size" : "xl",
+			  "num" : 3
+			},
+			{ "color" : "black",
+			  "size" : "xxl",
+			  "num" : 2
+			}
+		  ]
+		}
+	(4')return:
+		{ "status" : "ok"}
+		{ "status" : "failed"}
+		
