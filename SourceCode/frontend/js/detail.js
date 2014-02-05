@@ -6,7 +6,7 @@ function Comments(data) {
 	this.user_name = data.user_name;
 	this.comment = data.comment;
 	this.light_count = data.light_count;
-	this.comment_id = data.comment_id;	
+	this.comment_id = data.comment_id;
 }
 
 function DetailViewModel(){
@@ -123,7 +123,6 @@ function DetailViewModel(){
 		},"json");	
 	};
 	
-}
 }
 
 //bind

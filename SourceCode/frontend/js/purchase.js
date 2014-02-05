@@ -1,18 +1,19 @@
 ﻿function OrderConstructor(data){
-	this.own_color = ko.observable(data.color);
-	this.own_num = ko.observable(data.num);
-	this.own_size = ko.observable(data.size);
+	this.color = ko.observable(data.color);
+	this.num = ko.observable(data.num);
+	this.size = ko.observable(data.size);
 }
 
 
 function OrderViewModel() {
 	//获取gid,
 	var href = window.location.href;
+	console.log(href);
 	var index = href.indexOf('?');
 	if(index != -1) {
 		var gid = href.substr(index+1);
 	};
-	console.log("gid:"+gid);
+	console.log("purchase gid:"+gid);
 	
 	
 	
@@ -34,11 +35,12 @@ function OrderViewModel() {
 	
 	//加一单
 	self.addOrder = function(){
+		console.log("press add order btn");
 		this.addOrderBtnText("加一单");
 		
 		if(isPhone(this.newPhoneText()) && isChinese(this.newNameText()) ) {
 			var orderItem = {color:this.color(),
-							num:this.newNumText(),
+							num: Number(this.newNumText()),
 							size:this.size()
 							};
 			self.orderFull.push(new OrderConstructor(orderItem));
@@ -55,19 +57,23 @@ function OrderViewModel() {
 	
 	//提交订单
 	self.submitOrder = function() {
+		console.log("press submit order btn");
 		if(isPhone(this.newPhoneText()) && isChinese(this.newNameText()) ) {
 			//send to backend
-			$.ajax("http://xuezhang.duapp.com/shop_order.php", {
-				data: ko.toJSON({ gid: gid,
-							  name: this.newNameText,
-							  phone: this.newPhoneText,
-							  addr : this.newAddrText,
-							  time : this.time(),
-							  order: self.orderFull
-							  }),
-				type: "post", contentType: "application/json",
-				success: function(result) { alert(result.status) }
-			});
+			var mydata = { "gid": Number(gid),
+						   "name": this.newNameText,
+						   "phone": this.newPhoneText,
+						   "addr" : this.newAddrText,
+						   "time" : this.time(),
+						   "order": ko.toJS(self.orderFull)
+							  };
+			$.post("http://xuezhang.duapp.com/shop_order.php",
+				mydata, function(data) {
+					if(data.status=='ok') {
+						console.log("订单提交成功");
+					}
+				},"json"
+			);
 		}
     };
 	
