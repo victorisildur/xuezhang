@@ -6,6 +6,15 @@
 h1{
 	text-align: center;
 }
+.detail_gallery ul{
+	margin: 0px;
+	padding: 0px;
+}
+
+.detail_gallery li{
+	margin: 0px;
+}
+
 .detail_gallery img{
 	width: 100%;
 }

@@ -16,45 +16,52 @@ function DetailViewModel(){
 	self.newUserName = ko.observable();
 	self.newCommentText = ko.observable();
 	
-	self.price = ko.observable();
+	self.price= ko.observable('555');
 	self.sale_num = ko.observable();
 	self.title = ko.observable();
 	self.description = ko.observable();
-	//bind for purchase
-	self.gid = ko.observable();
 	
-	//获取gid
-	var gid = document.getElementById("gid_holder").value;
+	self.purchase_url = ko.observable();
+	
+	//获取gid,
+	var href = window.location.href;
+	var index = href.indexOf('?');
+	if(index != -1) {
+		var gid = href.substr(index+1);
+	};
+	console.log("gid:"+gid);
+	self.purchase_url('purchase.html?'+gid);
+	console.log(self.purchase_url);
 	
 	//获取detail接口数据(未测试)
-	$.post("http://xuezhang.duapp.com/details.php?action=detail", 
+	$.post("http://xuezhang.duapp.com/shop_detail.php?action=detail", 
 	{"gid":gid},
 	function (data){
-		if(data.status == ok) {
+		if(data.status == 'ok') {
 			console.log("detail post ok");
+			//desctiption,price,title,sale_num
+			self.price(data.price);
+			self.sale_num(data.sale_num);
+			self.title(data.title);
+			self.description(data.description);
 			//goods_detail[img_url]
 			var mappedDetailImgs = $.map(data.goods_detail, function(item) {return new Details(item)} );
 			self.detailImgs(mappedDetailImgs);
-			//desctiption
-			price = data.price;
-			sale_num = data.sale_num;
-			title = data.title;
-			description = data.description;			
+			
 		}
 	},"json"
-	);*/
+	);
 	
 	//初始化获取评论
 	 $.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
 	{"gid":gid,
 	 "num":5,
 	 "count":0,
-	 "type":"time"
+	 "type":"rank"
 	},
 	function(data) {
         // Update view model properties
-		if( data.status == 'ok')
-		{		
+		if( data.status == 'ok'){		
 			var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
 			self.comments(mappedComments);
 		}
@@ -100,7 +107,7 @@ function DetailViewModel(){
 			if(data.status == 'ok') {
 				//请求更新
 				$.post("http://xuezhang.duapp.com/shop_comments.php?action=get", 
-				{"gid":1,
+				{"gid":gid,
 				 "num":5,
 				 "count":0,
 				 "type":"rank"
