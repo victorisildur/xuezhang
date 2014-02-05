@@ -71,6 +71,7 @@ function OrderViewModel() {
 				mydata, function(data) {
 					if(data.status=='ok') {
 						alert("订单提交成功");
+						window.location.href = "index.html#page_new";
 					}
 				},"json"
 			);
