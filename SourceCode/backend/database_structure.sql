@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `weixin_autoreply`
 (
 	`id` int(10) NOT NULL auto_increment,
 	`question` varchar(100) NOT NULL DEFAULT 0,
-	`answer` text NOT NULL DEFAULT 0,
+	`answer` text NOT NULL DEFAULT '',
 	PRIMARY KEY (`id`)
 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -48,13 +48,39 @@ CREATE TABLE `shop_goods` (
 	PRIMARY KEY  (`goods_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+/* 订单表，一个order_id对应很多goods_id */
+DROP TABLE IF EXISTS `shop_orders`;
+CREATE TABLE `shop_orders` (
+	`rec_id` mediumint(8) unsigned NOT NULL auto_increment,
+	`order_sn` varchar(20) NOT NULL default '',
+	`goods_id` mediumint(8) unsigned NOT NULL default '0',
+	`color` varchar(10)  NOT NULL default 'white',
+	`size` varchar(10)  NOT NULL default 'xl',
+	`num` smallint(6)  NOT NULL default '1',
+	PRIMARY KEY  (`rec_id`),
+	KEY `order_sn` (`order_sn`),
+	KEY `goods_id` (`goods_id`)
+)  TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-
-
-
-
-
-
-
-
-
+/* 订单状态表，用户地址以及状态 */
+/* pay_status 有三个状态：
+0:待确定
+1:配送中
+2:已完成
+3:已取消
+order_sn 用来唯一标识一个订单，类似secret key，展示给客户
+*/
+DROP TABLE IF EXISTS `shop_order_status`;
+CREATE TABLE `shop_order_status` (
+	`order_id` mediumint(8) unsigned NOT NULL auto_increment,
+	`order_sn` varchar(20) NOT NULL default '',
+	`phone` varchar(60) NOT NULL default '',
+	`real_name` varchar(120) NOT NULL default '',
+	`best_time` varchar(120) NOT NULL default '',
+	`address` varchar(255) NOT NULL default '',
+	`total_fee` DECIMAL( 10, 2 ) NOT NULL DEFAULT '0.00',
+	`pay_status` tinyint(2) unsigned NOT NULL default '0',
+	`create_time` int(10) unsigned NOT NULL default '0',
+	`complete_time` int(10) unsigned NOT NULL default '0',
+	PRIMARY KEY  (`order_id`)
+	)  TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
