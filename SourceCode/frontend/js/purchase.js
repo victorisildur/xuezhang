@@ -70,7 +70,7 @@ function OrderViewModel() {
 			$.post("http://xuezhang.duapp.com/shop_order.php",
 				mydata, function(data) {
 					if(data.status=='ok') {
-						console.log("订单提交成功");
+						alert("订单提交成功");
 					}
 				},"json"
 			);
