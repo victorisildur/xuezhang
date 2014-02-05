@@ -1,4 +1,4 @@
-function OrderConstructor(data){
+﻿function OrderConstructor(data){
 	this.own_color = ko.observable(data.color);
 	this.own_num = ko.observable(data.num);
 	this.own_size = ko.observable(data.size);

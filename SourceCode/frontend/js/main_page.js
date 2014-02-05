@@ -1,4 +1,4 @@
-//榜单view model
+﻿//榜单view model
 function GoodsNew(data) {
 	this.gid = data.gid;
 	this.img_url = data.img_url;

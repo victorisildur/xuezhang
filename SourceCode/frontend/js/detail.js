@@ -1,4 +1,4 @@
-function Details(data) {
+﻿function Details(data) {
 	this.img_url = data.img_url;
 }
 
@@ -122,6 +122,8 @@ function DetailViewModel(){
 			}
 		},"json");	
 	};
+	
+}
 }
 
 //bind
