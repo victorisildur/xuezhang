@@ -160,7 +160,7 @@
 		phone		联系电话						y			string
 		order[]		订单详情						y			string
 	(4)备注
-		order[]格式为“颜色|尺寸|数量”，颜色为对应英文小写首字母(w/b/g), 尺寸为小写(xl/l/xxl)
+		order[]格式为“颜色|尺寸|数量”，颜色为对应英文小写(white/black/gray), 尺寸为小写(xl/l/xxl)
 		order[]可有多个，即在同一个表单中可同时出现下列标签。
 			<input name='order[]' value='w|xl|2'>
 			<input name='order[]' value='b|xl|1'>

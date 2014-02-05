@@ -18,16 +18,15 @@ Class DBClass {
 		}
 	}
 	
-	//数据库防注入检查
+	//数据库防注入检查，只针对数据库结构中字符串类型
 	public function sqlesc($value) {
 	// Stripslashes
 	if (get_magic_quotes_gpc()) {
 		$value = stripslashes($value);
 	}
 	// Quote if not a number or a numeric string
-	if (!is_numeric($value)) {
-		$value = "'" . mysql_real_escape_string($value) . "'";
-	}
+	$value = "'" . mysql_real_escape_string($value) . "'";
+
 	return $value;
 }
 	
@@ -54,7 +53,7 @@ Class DBClass {
 	public function query($sql) {
 		$this->write_log("查询 ".$sql);
 		$query = mysql_query($sql,$this->link_id);
-		if(!$query) $this->halt('Query Error: ' . $sql);
+		//if(!$query) $this->halt('Query Error: ' . $sql);
 		return $query;
 	}
 	

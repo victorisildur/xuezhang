@@ -13,7 +13,7 @@ $sql = "SELECT `title`, `price`, `sale_num`, `description`, `images` FROM `shop_
 
 $result = $conn->get_one($sql);
 
-$img_detail = explode('|', $result['img_detail']);
+$img_detail = explode('|', $result['images']);
 
 $img_urls = array();
 
