@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="static/css/jquery.mobile-1.3.2.css">
+  <link rel="stylesheet" href="static/css/gallery.css">
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="static/js/jquery.mobile-1.3.2.min.js"></script>
+  <script src="static/js/knockout-3.0.0.js"></script>
+  <script src="http://files.cnblogs.com/dachie/jquery.timers-1.2.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div data-role="page" id="page_detail" data-theme="d" >
+		<div data-role="header" data-position="fixed">
+			<a data-role="button" onclick="window.scrollTo(0,0);return false;">详情</a>
+			<h1><span data-bind="text: title"></h1>
+			<a data-role="button" onclick="window.scrollTo(0,99999);return false;">评价</a>
+		</div>
+		
+		<div data-role="content">
+			<!--顶部大图-->
+			<div class = detail_gallery>
+				
+			</div>
+			<p style="float:center">仅售：<span data-bind="text: price"></span></p>
+			<p style="float:center">已售：<span data-bind="text: sale_num"></span>件</p>
+			<!--购买键-->
+			<div>
+				<a data-bind="attr:{href: purchase_url}" data-ajax="false"><button>购买</button></a>
+			</div>
+			<!--尺码、配送说明-->
+			<div>
+				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
+				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
+				<span style="color:red">特别通知：</span><p data-bind="text:description"></p>
+				<p>尺码对照表：</p>
+				<img src="static/img/size_table.jpg" width="100%"/>
+			</div>
+			<!--图片展示-->
+			<div class = detail_gallery>
+				<ul style="list-style-type: none" data-bind="foreach : detailImgs , visible:detailImgs().length > 0">
+					<li>
+						<!--图片-->
+						<img data-bind="attr:{src: img_url}"/>
+					</li>
+				<ul>
+			</div>
+			<!--评论区+购买键-->
+			<div class="comment_buy" >
+				<!--评论区-->
+				<div class="comment">
+					<ul style="list-style-type: none" data-bind="foreach:comments,visible:comments().length > 0">
+						<li>
+						<span data-bind="text: user_name" class="user_name"> </span> 
+						<!--亮了-->
+						<form data-bind="submit: $parent.lightComment" style="display:inline" ><!--this域问题！-->
+							<button type="submit"><img src="static/img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>
+						</form>						
+						<p data-bind="text:comment" >  </p>
+						</li>
+					</ul>
+				</div>
+				<!--提交评论-->
+				<div>
+					<form data-bind="submit: submitComment">
+					用户名: <input data-bind="value: newUserName" placeholder="学长甲"/><br/>
+					评论:   <input data-bind="value: newCommentText" placeholder="说两句吧" />			
+					<button type="submit">提交评论</button>
+					</form>
+				</div>
+				<!--购买键-->
+				<div >
+					<a data-bind="attr:{href: purchase_url}" data-ajax="false"><button>购买</button></a>
+				</div>
+			</div>
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html#page_new" data-ajax="false" >新品</a></li>
+					<li><a href="index.html#page_bestsales" data-ajax="false" >榜单</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--call for knockoutjs-->
+	<<script src="static/js/detail.js"></script>
+</body>
+
+</html>
