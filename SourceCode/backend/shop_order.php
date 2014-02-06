@@ -6,7 +6,7 @@ header("Access-Control-Allow-Origin: *");
 require_once('database_class.php');
 require_once('common_functions.php');
 $conn = new DBClass();
-
+/* 代码逻辑错误
 //检查session中数据
 if(empty($_SESSION['name']) || empty($_SESSION['phone']) || empty($_SESSION['addr']) || empty($_SESSION['time']))
 {
@@ -26,6 +26,11 @@ else
 	$addr = $conn->sqlesc($_SESSION['addr']);
 	$time = $conn->sqlesc($_SESSION['time']);
 }
+*/
+$name = empty($_POST['name']) ? die('{ "status" : "failed"}') : $conn->sqlesc($_POST['name']);
+$phone = empty($_POST['phone']) ? die('{ "status" : "failed"}') : $conn->sqlesc($_POST['phone']);
+$addr = empty($_POST['addr']) ? die('{ "status" : "failed"}') : $conn->sqlesc($_POST['addr']);
+$time = empty($_POST['time']) ? die('{ "status" : "failed"}') : $conn->sqlesc($_POST['time']);
 
 $gid = empty($_REQUEST['gid']) ? die('{ "status" : "failed"}') : intval($_REQUEST['gid']);
 $orders = !is_array($_POST['order']) ? die('{ "status" : "failed"}') : $_POST['order'];
