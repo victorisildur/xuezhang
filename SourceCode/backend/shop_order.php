@@ -4,6 +4,7 @@ session_start();
 header("Access-Control-Allow-Origin: *");
 //装载数据库类
 require_once('database_class.php');
+require_once('common_functions.php');
 $conn = new DBClass();
 
 //检查session中数据
@@ -61,6 +62,17 @@ $time_now = time();
 $sql = "INSERT INTO `shop_order_status` (`order_sn`, `phone`, `real_name`, `best_time`, `address`, `total_fee`, `pay_status`, `create_time`, `complete_time`) VALUES ($order_sn, $phone, $name, $time, $addr, $total_fee, 0, $time_now, 0);";
 if($conn->query($sql)) echo '{ "status" : "ok"}';
 else echo '{ "status" : "failed"}';
+//更新已售数量
+$sql = "UPDATE `shop_goods` SET `sale_num` = `sale_num` + $total_num WHERE `goods_id` = $gid";
+$conn->query($sql);
+//更新用户表
+if(!empty($_SESSION['open_id']) && $_POST['save'])
+{
+	$open_id = $conn->sqlesc($_SESSION['open_id']);
+	if($_SESSION['exist']) $sql = "UPDATE `shop_users` SET `name` = $name,`address` = $addr,`phone` = $phone,`best_time` = $time,`last_login`=".time().', `last_ip`='.$conn->sqlesc(getip())." WHERE `open_id` = $open_id";
+	else $sql = "INSERT INTO `shop_users` (`open_id`, `name`, `address`, `phone`, `best_time`, `last_login`, `last_ip`) VALUES ($open_id, $name, $addr, $phone, $time, ".time().', '.$conn->sqlesc(getip()).');';
+	$conn->query($sql);
+}
 
 //copy from internet
 function GenerateOrderSN()
