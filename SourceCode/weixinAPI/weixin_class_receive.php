@@ -10,9 +10,6 @@ class WeiXinAPIReceive extends WeiXinAPIBase
 	private $toUsername = '';
 	public $form_MsgType;
 	
-	//NEWS相关
-	private $newsCount = 0;
-	private $newsBody = '';
 /* 
 * 构造函数,子类的构造函数实际上是覆盖(override)了父类的构造函数
 */
@@ -72,7 +69,9 @@ class WeiXinAPIReceive extends WeiXinAPIBase
 	public function answerText()
 	{
 		$ans = $this->getQuestionAnswer($this->postObj->Content);
-		empty($ans) ? $this->genTextMsg($this->robotAnswer($this->postObj->Content)) : $ans;
+		$ans = str_replace('{FromUsername}', $this->fromUsername, $ans);
+		$ans = str_replace('{ToUsername}', $this->toUsername, $ans);
+		return empty($ans) ? $this->genTextMsg($this->robotAnswer($this->postObj->Content)) : $ans;
 	}
 	
 	private function robotAnswer($keyword)

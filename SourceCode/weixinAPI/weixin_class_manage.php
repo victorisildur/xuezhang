@@ -1,5 +1,6 @@
 <?php
-require_once('weixin_class_reveive.php');
+require_once('weixin_class_base.php');
+require_once('weixin_tpl_receive.php');
 
 //图文消息的时候，表单的name应为数组形式 eg: <input name = 'Url[]' />
 //目前只能自动回复文本、音乐、图文三种消息
@@ -58,6 +59,9 @@ class WeiXinAPIVairable
 class WeiXinAPIManage extends WeiXinAPIBase
 {
 	public $postObj;
+	//NEWS相关
+	private $newsCount = 0;
+	private $newsBody = '';
 
 /* 
 * 构造函数,子类的构造函数实际上是覆盖(override)了父类的构造函数
@@ -65,6 +69,8 @@ class WeiXinAPIManage extends WeiXinAPIBase
 	function __construct()
 	{
 		parent::__construct();
+		$this->newsCount = 0;
+		$this->newsBody = '';
 	}
 
 	public function addQuestionAnswer($question, $answer)
@@ -96,7 +102,7 @@ class WeiXinAPIManage extends WeiXinAPIBase
 	//纯文本消息
 	public function genTextMsg($contentStr)
 	{
-		return sprintf(WEIXIN_TEXT_MSG, $this->fromUsername, $this->toUsername, time(), $contentStr);
+		return sprintf(WEIXIN_TEXT_MSG, '{FromUsername}', '{ToUsername}', time(), $contentStr);
 	}
 	//图文消息
 	//$url点击图文消息跳转链接
@@ -104,34 +110,36 @@ class WeiXinAPIManage extends WeiXinAPIBase
 	public function addArticle($title, $description, $picUrl, $url)
 	{
 		if($this->newsCount > 10) return false;
-		$this->newsBody += sprintf(WEIXIN_NEWS_MSG_BODY, $title, $description, $picUrl, $url);
+		$this->newsBody .= sprintf(WEIXIN_NEWS_MSG_BODY, $title, $description, $picUrl, $url);
 		$this->newsCount += 1;
 		return true;
 	}
 	public function addArticleFinish()
 	{
-		$this->newsBody = sprintf(WEIXIN_NEWS_MSG_BEGIN, $this->fromUsername, $this->toUsername, time(), $this->newsCount) + $this->newsBody;
-		$this->newsBody += WEIXIN_NEWS_MSG_END;
-		return $this->newsBody;
+		$out = sprintf(WEIXIN_NEWS_MSG_BEGIN, '{FromUsername}', '{ToUsername}', time(), $this->newsCount) . $this->newsBody;
+		$out .= WEIXIN_NEWS_MSG_END;
+		$this->newsBody = '';
+		$this->newsCount = 0;
+		return $out;
 	}
 	//图片消息
 	//$mediaId通过上传多媒体文件，得到的id
 	public function genImageMsg($mediaId)
 	{
-		return sprintf(WEIXIN_IMAGE_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId);
+		return sprintf(WEIXIN_IMAGE_MSG, '{FromUsername}', '{ToUsername}', time(), $mediaId);
 	}
 	//语音消息
 	//$mediaId通过上传多媒体文件，得到的id
 	public function genVoiceMsg($mediaId)
 	{
-		return sprintf(WEIXIN_VOICE_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId);
+		return sprintf(WEIXIN_VOICE_MSG, '{FromUsername}', '{ToUsername}', time(), $mediaId);
 	}
 	//视频消息
 	//$mediaId通过上传多媒体文件，得到的id，必须
 	//其余项非必须
 	public function genVideoMsg($mediaId, $title = '', $description = '')
 	{
-		return sprintf(WEIXIN_VIDEO_MSG, $this->fromUsername, $this->toUsername, time(), $mediaId, $title, $description);
+		return sprintf(WEIXIN_VIDEO_MSG, '{FromUsername}', '{ToUsername}', time(), $mediaId, $title, $description);
 	}
 	//音乐消息
 	//$mediaId缩略图的媒体id，通过上传多媒体文件，得到的id
@@ -139,7 +147,7 @@ class WeiXinAPIManage extends WeiXinAPIBase
 	//$HQMusicUrl高质量音乐链接，WIFI环境优先使用该链接播放音乐
 	public function genMusicMsg($mediaId, $title = '', $description = '', $musicUrl = '', $HQMusicUrl = '')
 	{
-		return sprintf(WEIXIN_MUSIC_MSG, $this->fromUsername, $this->toUsername, time(), $title, $description, $musicUrl, $HQMusicUrl, $mediaId);
+		return sprintf(WEIXIN_MUSIC_MSG, '{FromUsername}', '{ToUsername}', time(), $title, $description, $musicUrl, $HQMusicUrl, $mediaId);
 	}
 //结束
 

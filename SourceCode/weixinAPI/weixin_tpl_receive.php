@@ -68,8 +68,7 @@ define("WEIXIN_NEWS_MSG_BODY", "<item>
 			<Description><![CDATA[%s]]></Description>
 			<PicUrl><![CDATA[%s]]></PicUrl>
 			<Url><![CDATA[%s]]></Url>
-			</item>
-			<item>");
+			</item>");
 define("WEIXIN_NEWS_MSG_END", "
            </Articles>
            <FuncFlag>1</FuncFlag>

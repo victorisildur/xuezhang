@@ -26,7 +26,7 @@ else
 	$time = $conn->sqlesc($_SESSION['time']);
 }
 
-$gid = empty($_POST['gid']) ? die('{ "status" : "failed"}') : intval($_POST['gid']);
+$gid = empty($_REQUEST['gid']) ? die('{ "status" : "failed"}') : intval($_REQUEST['gid']);
 $orders = !is_array($_POST['order']) ? die('{ "status" : "failed"}') : $_POST['order'];
 //取出商品价格
 if(!empty($_SESSION['price_'.$gid])) $price = $_SESSION['price_'.$gid];
