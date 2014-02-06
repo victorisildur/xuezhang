@@ -1,5 +1,6 @@
 <?php
 require_once('weixin_class_receive.php');
+require_once('auth_crypt_class.php');
 
 $weixin = new WeiXinAPIReceive();
 
@@ -19,7 +20,9 @@ switch ($weixin->form_MsgType)
 		}
 		die();
 	case 'text'://文本消息
-		echo $weixin->answerText();
+		$content = $weixin->postObj->Content;
+		if (preg_match("/dg\d+$/i", $content)) echo $weixin->genTextMsg(genAuthURL(str_replace('dg', '', $content)));
+		else echo $weixin->answerText();
 		die();
 	/*
 	case '':
@@ -32,4 +35,15 @@ switch ($weixin->form_MsgType)
 	default:
 		echo $weixin->genTextMsg('麻烦客官再说一遍~');
 		die();
+}
+
+function genAuthURL($id = '')
+{
+	global $weixin;
+	$Crypt=new Crypt();
+	$fromUser = $weixin->postObj->FromUserName;
+	//产生验证url
+	$src = $fromUser.'_'.time().'_xuezhang';
+	$authcode = $Crypt->tripleDESEncrypt($src, true);
+	return SITE_ROOT.'weixin_auth.php?authcode='.$authcode.'&user='.$fromUser.'&url=';
 }

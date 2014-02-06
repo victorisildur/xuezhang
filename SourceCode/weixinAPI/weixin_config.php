@@ -3,6 +3,8 @@ define("WEIXIN_TOKEN", "xuezhangkankandoulaikankana");
 define("WEIXIN_APPID", "weixin");
 define("WEIXIN_APPSECRET", "weixin");
 
+define("SITE_ROOT", "http://xuezhang.duapp.com/");
+
 //其他常量
 define("WEIXIN_TEXT", "0");
 define("WEIXIN_NEWS", "1");

@@ -82,5 +82,21 @@ CREATE TABLE `shop_order_status` (
 	`pay_status` tinyint(2) unsigned NOT NULL default '0',
 	`create_time` int(10) unsigned NOT NULL default '0',
 	`complete_time` int(10) unsigned NOT NULL default '0',
-	PRIMARY KEY  (`order_id`)
+	PRIMARY KEY  (`order_id`),
+	KEY `order_sn` (`order_sn`)
 	)  TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+	
+/* 用户表 */
+DROP TABLE IF EXISTS `shop_users`;
+CREATE TABLE `shop_users` (
+	`user_id` smallint(5) unsigned NOT NULL auto_increment,
+	`open_id` varchar(40) NOT NULL default '',
+	`name` varchar(60) NOT NULL default '',
+	`address` varchar(255) NOT NULL default '',
+	`phone` varchar(60) NOT NULL default '',
+	`best_time` varchar(120) NOT NULL default '',
+	`last_login` int(11) NOT NULL default '0',
+	`last_ip` varchar(15) NOT NULL default '',
+	PRIMARY KEY  (`user_id`),
+	KEY `open_id` (`open_id`)
+)TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
