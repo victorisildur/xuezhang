@@ -36,7 +36,7 @@
 				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
 				<span style="color:red">特别通知：</span><p data-bind="text:description"></p>
 				<p>尺码对照表：</p>
-				<img src="static/img/size_table.jpg" width="100%"/>
+				<img src="img/size_table.jpg" width="100%"/>
 			</div>
 			<!--图片展示-->
 			<div class = detail_gallery>
@@ -55,20 +55,16 @@
 						<li>
 						<span data-bind="text: user_name" class="user_name"> </span> 
 						<!--亮了-->
-						<form data-bind="submit: $parent.lightComment" style="display:inline" ><!--this域问题！-->
-							<button type="submit"><img src="static/img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>
-						</form>						
+						<button data-bind="click: $parent.lightComment"><img src="img/light_small.png"/>亮了（<span data-bind="text: light_count"></span>）</button>						
 						<p data-bind="text:comment" >  </p>
 						</li>
 					</ul>
 				</div>
 				<!--提交评论-->
 				<div>
-					<form data-bind="submit: submitComment">
 					用户名: <input data-bind="value: newUserName" placeholder="学长甲"/><br/>
 					评论:   <input data-bind="value: newCommentText" placeholder="说两句吧" />			
-					<button type="submit">提交评论</button>
-					</form>
+					<button data-bind="click: submitComment">提交评论</button>
 				</div>
 				<!--购买键-->
 				<div >
@@ -87,7 +83,7 @@
 		</div>
 	</div>
 	<!--call for knockoutjs-->
-	<<script src="static/js/detail.js"></script>
+	<<script src="js/detail.js"></script>
 </body>
 
 </html>
