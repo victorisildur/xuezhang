@@ -186,11 +186,11 @@
 5.后台管理接口描述
 	5.1 获取文件接口
 		(1)功能说明：浏览现有商品文件
-		(2)请求说明：post参数到后端xxx.php页面
+		(2)请求说明：post参数到后端manage/shop_imginfo.php页面
 		(3)parameter:
 			key		description		must
 			
-		(4)return:
+		(4)return:（待修改）
 			{ "status" : "ok",
 			  goods : 
 			  [
@@ -225,25 +225,26 @@
 		
 			{"status":"failed"}
 			
-	5.2 文件操作接口
-		(1)功能说明：对商品数据进行添加，删除操作
-		(2)请求说明：post到后端xx.php页面
+	5.2 文件删除接口
+		(1)功能说明：对商品图片进行删除操作
+		(2)请求说明：post到后端manage/shop_imgdel.php页面
 		(3)parameter:
-			key			description							must	type		备注
+			key			description			must	type		备注
 			----------------------------------------------------------------------
-			gid			要操作的商品id						y		int
-			object		要操作的项目						y		string		"description","price","title","img_new","img_top","img_detail"
-			action		删除或添加							y		string		"delete","add"
-			img_id		如删除img_detail，需指明其序号		n		int
-			如：
-			{ "gid" : 1,
-			  "object" : "img_detail",
-			  "action" : "delete",
-			  "img_id" : 2
-			}
+			image_id      图片对应id          y      int
 		(4)return:
 			{"status" : "ok"}
 			{"status" : "failed"}
-			
-
+	5.3 文件上传接口
+		(1)功能说明：对商品图片进行上传操作
+		(2)请求说明：post到后端manage/shop_imgupload.php页面
+		(3)parameter:
+		key			description			must	type		备注
+		----------------------------------------------------------------------
+		img_type      图片作用           y       int      0 null, 1 img_new, 2 img_rank, 3 img_detail
+		file		  图片文件		   	 y		file
+		gid			  商品id			 y		int
+		filename	  上传后文件名		 n		string		有则用此文件名，无则自动生成文件名
+		(4)return:
+		失败或图片url
 		
