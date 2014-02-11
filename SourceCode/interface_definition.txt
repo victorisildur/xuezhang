@@ -184,7 +184,7 @@
 		{ "status" : "failed"}
 	
 5.后台管理接口描述
-	5.1 获取文件接口
+	5.1 获取图片信息接口
 		(1)功能说明：浏览现有商品文件
 		(2)请求说明：post参数到后端manage/shop_imginfo.php页面
 		(3)parameter:
@@ -194,32 +194,26 @@
 			{ "status" : "ok",
 			  goods : 
 			  [
-			    { "gid" : 1,
-				  "price": 38,
-				  "title" : "单身无罪，光棍有理",
-				  "description" : "一件光棍衫，半世独身缘",
-				  "img_new" : "http://www.baidu.com/img/bdlogo.gif"
-				  "img_top" : "http://www.baidu.com/img/bdlogo.gif"
-				  "img_detail" :
-				  [
-				     {"img_url":"http://www.baidu.com/img/bdlogo.gif"},
-					 {"img_url":"http://www.baidu.com/img/bdlogo.gif"},
-					 {"img_url":"http://www.baidu.com/img/bdlogo.gif"}
-				  ]
+			    { "img_url" : "http://www.baidu.com/img/bdlogo.gif",
+				  "img_id" : 1,
+				  "gid" : 1,
+				  "img_type" : "img_new"
 				},
-				{ "gid" : 2,
-				  "price": 38,
-				  "title" : "毕业，那一年",
-				  "description" : "我的眼角有泪滑过，那是我无悔的青春",
-				  "img_new" : "http://www.baidu.com/img/bdlogo.gif"
-				  "img_top" : "http://www.baidu.com/img/bdlogo.gif"
-				  "img_detail" :
-				  [
-				     {"img_url":"http://www.baidu.com/img/bdlogo.gif"},
-					 {"img_url":"http://www.baidu.com/img/bdlogo.gif"},
-					 {"img_url":"http://www.baidu.com/img/bdlogo.gif"}
-				  ]
-				}
+				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
+				  "img_id" : 2,
+				  "gid" : 1,
+				  "img_type" : "img_top"
+				},
+				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
+				  "img_id" : 3,
+				  "gid" : 1,
+				  "img_type" : "img_detail"
+				},
+				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
+				  "img_id" : 4,
+				  "gid" : 1,
+				  "img_type" : "img_detail"
+				},
 			  ]
 			}
 		
@@ -231,10 +225,11 @@
 		(3)parameter:
 			key			description			must	type		备注
 			----------------------------------------------------------------------
-			image_id      图片对应id          y      int
+			img_id      图片对应id          y      int
 		(4)return:
 			{"status" : "ok"}
 			{"status" : "failed"}
+			
 	5.3 文件上传接口
 		(1)功能说明：对商品图片进行上传操作
 		(2)请求说明：post到后端manage/shop_imgupload.php页面
