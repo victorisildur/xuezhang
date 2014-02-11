@@ -40,11 +40,8 @@ CREATE TABLE `shop_goods` (
 	`title` varchar(120) NOT NULL default '',
 	`price` decimal(10,2) unsigned NOT NULL default 0.00,
 	`sale_num` int(10) unsigned NOT NULL default 0,
-	`img_new` varchar(255) NOT NULL default '',
-	`img_rank` varchar(255) NOT NULL default '',
 	`add_time` int(10) unsigned NOT NULL default 0,
 	`description` text,
-	`images` text,
 	PRIMARY KEY  (`goods_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -58,8 +55,8 @@ CREATE TABLE `shop_orders` (
 	`size` varchar(10)  NOT NULL default 'xl',
 	`num` smallint(6)  NOT NULL default '1',
 	PRIMARY KEY  (`rec_id`),
-	KEY `order_sn` (`order_sn`),
-	KEY `goods_id` (`goods_id`)
+	KEY `shop_order_status` (`order_sn`),
+	KEY `shop_goods` (`goods_id`)
 )  TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 /* 订单状态表，用户地址以及状态 */
@@ -83,10 +80,10 @@ CREATE TABLE `shop_order_status` (
 	`create_time` int(10) unsigned NOT NULL default '0',
 	`complete_time` int(10) unsigned NOT NULL default '0',
 	PRIMARY KEY  (`order_id`),
-	KEY `order_sn` (`order_sn`)
+	KEY `shop_orders` (`order_sn`)
 	)  TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 	
-/* 用户表 */
+/* 用户表 ---未完成 */
 DROP TABLE IF EXISTS `shop_users`;
 CREATE TABLE `shop_users` (
 	`user_id` smallint(5) unsigned NOT NULL auto_increment,
@@ -99,4 +96,21 @@ CREATE TABLE `shop_users` (
 	`last_ip` varchar(15) NOT NULL default '',
 	PRIMARY KEY  (`user_id`),
 	KEY `open_id` (`open_id`)
+)TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+/* 上传图片表 */
+/* image_type
+0 null
+1 img_new
+2 img_rank
+3 img_detail
+*/
+DROP TABLE IF EXISTS `shop_images`;
+CREATE TABLE `shop_images` (
+	`image_id` mediumint(8) unsigned NOT NULL auto_increment,
+	`image_name` varchar(255) NOT NULL default '',
+	`image_type` tinyint(2) unsigned NOT NULL default '0',
+	`goods_id` int(10) unsigned NOT NULL,
+	PRIMARY KEY  (`image_id`),
+	KEY `shop_goods` (`goods_id`)
 )TYPE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

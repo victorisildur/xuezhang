@@ -189,35 +189,34 @@
 		(2)请求说明：post参数到后端manage/shop_imginfo.php页面
 		(3)parameter:
 			key		description		must
-			
-		(4)return:（待修改）
+			gid		商品id			y
+		(4)return:
 			{ "status" : "ok",
-			  goods : 
+			  images : 
 			  [
 			    { "img_url" : "http://www.baidu.com/img/bdlogo.gif",
 				  "img_id" : 1,
-				  "gid" : 1,
-				  "img_type" : "img_new"
+				  "img_type" : 1
 				},
 				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
 				  "img_id" : 2,
-				  "gid" : 1,
-				  "img_type" : "img_top"
+				  "img_type" : 2
 				},
 				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
 				  "img_id" : 3,
-				  "gid" : 1,
-				  "img_type" : "img_detail"
+				  "img_type" : 3
 				},
 				{ "img_url" : "http://www.baidu.com/img/bdlogo.gif",
 				  "img_id" : 4,
-				  "gid" : 1,
-				  "img_type" : "img_detail"
+				  "img_type" : 3
 				},
 			  ]
 			}
 		
 			{"status":"failed"}
+		(5) 备注：
+			img_type为int类型
+			0 null, 1 img_new, 2 img_rank, 3 img_detail
 			
 	5.2 文件删除接口
 		(1)功能说明：对商品图片进行删除操作

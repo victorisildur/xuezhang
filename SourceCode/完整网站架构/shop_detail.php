@@ -10,18 +10,17 @@ if(empty($_REQUEST['gid'])) die(json_encode(array('status'=>'fail')));
 $gid = intval($_REQUEST['gid']);
 $conn = new DBClass();
 
-$sql = "SELECT `title`, `price`, `sale_num`, `description`, `images` FROM `shop_goods` WHERE `goods_id` = $gid";
+$sql = "SELECT `image_name` FROM `shop_images` WHERE `goods_id` = $gid AND `image_type` = 3";//img_detail
+$query = $conn->query($sql);
+$img_urls = array();
+while($result=mysql_fetch_array($query))
+{
+	$img_urls[] = BCS_ROOT.$result['image_name'];
+}
+
+$sql = "SELECT `title`, `price`, `sale_num`, `description` FROM `shop_goods` WHERE `goods_id` = $gid";
 
 $result = $conn->get_one($sql);
-
-$img_detail = explode('|', $result['images']);
-
-$img_urls = array();
-
-foreach ($img_detail as $url)
-{
-	$img_urls[] = array('img_url'=>$url);
-}
 
 echo json_encode(array('status'=>'ok',
 						'goods_detail'=>$img_urls,

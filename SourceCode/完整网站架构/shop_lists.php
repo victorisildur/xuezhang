@@ -15,12 +15,12 @@ $conn = new DBClass();
 switch ($action)
 {
 case 'new':
-	$result = $conn->query("SELECT `goods_id`, `img_new` FROM `shop_goods` ORDER BY `add_time` DESC LIMIT $count,$num");
+	$result = $conn->query("SELECT shop_goods.goods_id, shop_images.image_name FROM `shop_goods`, `shop_images` WHERE shop_goods.goods_id = shop_images.goods_id AND shop_images.image_type = 1 ORDER BY `add_time` DESC LIMIT $count,$num");
 	if($result)	echo genNewLists($result);
 	else echo json_encode(array('status'=>'fail'));	
 	die();
 case 'rank':
-	$result = $conn->query("SELECT `goods_id`, `img_rank`, `price`, `sale_num` FROM `shop_goods` ORDER BY `sale_num` DESC LIMIT $count,$num");
+	$result = $conn->query("SELECT shop_goods.goods_id, shop_images.image_name, `price`, `sale_num` FROM `shop_goods`, `shop_images` WHERE shop_goods.goods_id = shop_images.goods_id AND shop_images.image_type = 2 ORDER BY `sale_num` DESC LIMIT $count,$num");
 	if($result)	echo genRankLists($result);
 	else echo json_encode(array('status'=>'fail'));	
 	die();
@@ -36,7 +36,7 @@ function genNewLists($query)
 	{
 		$item = array(
 					'gid'=>$result['goods_id'],
-					"img_url"=>$result['img_new']);
+					"img_url"=>BCS_ROOT.$result['image_name']);
 		$data[] = $item;
 	}
 	$info = array('status'=>'ok',
@@ -50,7 +50,7 @@ function genRankLists($query)
 	{
 		$item = array(
 					'gid'=>$result['goods_id'],
-					"img_url"=>$result['img_rank'],
+					"img_url"=>BCS_ROOT.$result['image_name'],
 					"price"=>$result['price'],
 					"sale_num"=>$result['sale_num']);
 		$data[] = $item;
