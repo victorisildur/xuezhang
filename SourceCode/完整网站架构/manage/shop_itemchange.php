@@ -23,8 +23,8 @@ else if(check_inputs())
 	$result = $conn->query("UPDATE `shop_goods` SET `title` = $title, `price` = $price, `add_time` = $time, `description` = $description WHERE `goods_id` = $gid");
 	if($result)	$info = '修改成功';
 	else $info = '修改失败';
-	$title = $_POST['title'];
-	$description =$_POST['description'];
+	$title = htmlspecialchars($_POST['title']);
+	$description =htmlspecialchars($_POST['description']);
 
 }
 else
@@ -33,9 +33,9 @@ else
 	$gid = intval($_REQUEST['gid']);
 	$sql = "SELECT `title`, `price`, `description` FROM `shop_goods` WHERE `goods_id` = $gid";
 	$result = $conn->get_one($sql);
-	$title = $result['title'];
-	$price = $result['price'];
-	$description = $result['description'];
+	$title = htmlspecialchars($result['title']);
+	$price = htmlspecialchars($result['price']);
+	$description = htmlspecialchars($result['description']);
 }
 
 require_once(TEMPLATES_PATH.'manage/header.htm');

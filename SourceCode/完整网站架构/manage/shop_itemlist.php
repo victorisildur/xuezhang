@@ -18,7 +18,7 @@ $html = '';
 while($result=mysql_fetch_array($query))
 {
 	$gid = $result['goods_id'];
-	$title = $result['title'];
+	$title = htmlspecialchars($result['title']);
 	$price = $result['price'];
 	$html .= "<tr id='gid_$gid'>
                   <td>$gid</td>
