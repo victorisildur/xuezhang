@@ -24,7 +24,7 @@ while($result=mysql_fetch_array($query))
                   <td>$gid</td>
                   <td>$title</td>
                   <td>$price</td>
-                  <td><a href='shop_itemchange.php?gid=$gid'>修改</a> <a href='#' class='ajax-del'>删除</a> <a href='shop_imginfo.php?gid=$gid' >图片管理</a></td>
+                  <td><a href='shop_itemchange.php?gid=$gid'>修改</a> <a href='#' class='ajax-del'>删除</a> <a href='shop_imginfo.php?gid=$gid' >图片管理</a> <a href='shop_comments.php?gid=$gid' >评论管理</a></td>
                 </tr>";
 }
 if($page <= 1)
@@ -48,7 +48,7 @@ else
 	$goto_next = basename(__FILE__).'?page='.($page+1);
 }
 
-$page = "<ul class='pager'>
+$html_page = "<ul class='pager'>
   <li class='previous$disable_pre'><a href='$goto_pre'>&larr; 上一页</a></li>
   <li class='next$disable_next'><a href='$goto_next'>下一页 &rarr;</a></li>
 </ul>";
