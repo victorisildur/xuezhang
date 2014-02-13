@@ -11,9 +11,13 @@ define ( 'BCS_SK', '' );//SK 私钥
 define ( 'BCS_SUPERFILE_POSTFIX', '_bcs_superfile_' );//superfile 每个object分片后缀
 define ( 'BCS_SUPERFILE_SLICE_SIZE', 1024 * 1024 );//sdk superfile分片大小 ，单位 B（字节）
 
+//后台用户名密码
+define("ADMIN_NAME", "");
+define("ADMIN_PWD", "");
 
 //路径常量定义
 define("SITE_ROOT", "http://xuezhang.duapp.com/");
+define("BCS_ROOT", " http://bcs.duapp.com/xuezhang");
 define ('ROOT_PATH',  dirname(__FILE__).'/');
 define ('COMMON_PATH',  ROOT_PATH.'common/');
 define ('STATIC_PATH',  ROOT_PATH.'static/');

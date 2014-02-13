@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+ <style type="text/css">
+ .body, body{
+font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+ </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">学长看看</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">学长看看</a>
+        </div>
+	<div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">商品管理</a></li>
+            <li><a href="#">微信管理</a></li>
+            <li><a href="#">关于</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+</div>
+</nav>
+	
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation" style="
+    padding-top: 40px;">
+          <div class="list-group">
+            <a class="list-group-item active">商品管理</a>
+            <a href="#" class="list-group-item">商品列表</a>
+            <a href="#" class="list-group-item">添加商品</a>
+            <a href="#" class="list-group-item">修改商品</a>
+            <a href="#" class="list-group-item">上传图片</a>
+            <a href="#" class="list-group-item">删除图片</a>
+          </div>
+        </div>
+<div class="col-xs-12 col-sm-9">
+<script>
+$(document).ready(function(){
+  $(".ajax-del").click(function(){
+	var t = $(this).parent().parent();
+	var gid = t.attr('id').replace('gid_','');
+	$.post( "shop_itemdel.php",
+	{"gid":gid,
+	},
+	function(data) {
+		if(data.status == "ok") {
+			t.remove();
+		}
+		else {
+			alert('删除失败');
+		}
+	},"json"
+	);
+  });
+});
+</script>
+<h1>商品列表</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>gid</th>
+                  <th>商品名称</th>
+                  <th>单价</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="gid_1">
+                  <td>1</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td><a href="#">修改</a>   <a href="#" class="ajax-del">删除</a></td>
+                </tr>
+                <tr id="gid_2">
+                  <td>2</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td><a href="#">修改</a>   <a href="#" class="ajax-del">删除</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+</div>
+</div>
+    </div> <!-- /container -->
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="container">
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">©学长看看</p>
+      </div>
+</div>
+  </div>
+</nav>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>

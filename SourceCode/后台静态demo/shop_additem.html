@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>后台管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+ <style type="text/css">
+ .body, body{
+font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+ 
+ 
+ </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+          <a class="navbar-brand" href="#">学长看看</a>
+    </div>
+	<div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./Off Canvas Template for Bootstrap_files/Off Canvas Template for Bootstrap.htm">商品管理</a></li>
+            <li><a href="#">微信管理</a></li>
+            <li><a href="#">关于</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+</div>
+</nav>
+	
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation" style="
+    padding-top: 40px;">
+          <div class="list-group">
+            <a class="list-group-item active">商品管理</a>
+            <a href="#" class="list-group-item">添加商品</a>
+            <a href="#" class="list-group-item">修改商品</a>
+            <a href="#" class="list-group-item">上传图片</a>
+            <a href="#" class="list-group-item">删除图片</a>
+          </div>
+        </div>
+<div class="col-xs-12 col-sm-9">
+<form role="form">
+  <h2>添加商品</h2>
+  <div class="form-group">
+    <label for="g_title">商品名称</label>
+    <input type="text" class="form-control" id="g_title" placeholder="请输入商品名称" name="title">
+  </div>
+  <div class="form-group">
+    <label for="g_price">单价</label>
+    <input type="text" class="form-control" id="g_price" name="price" placeholder="单价">
+  </div>
+
+  <div class="form-group">
+  <label for="g_description">商品描述</label>
+  <textarea class="form-control" rows="3" name="description" id="g_description" placeholder="写点什么吧"></textarea>
+  </div>
+  <button type="submit" class="btn btn-lg btn-primary btn-block">提交</button>
+</form>
+</div>
+    </div> <!-- /container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>

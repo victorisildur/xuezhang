@@ -1,0 +1,78 @@
+<div class="col-xs-12 col-sm-9">
+ <style type="text/css">
+.img-action {
+  text-align: center;
+  font-size: 15px;
+}
+ </style>
+<script type="text/javascript">
+ function getQueryStringByName(name){
+	 var result = location.search.match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
+	 if(result == null || result.length < 1){
+		  return "";
+	 }
+	 return result[1];
+ }
+$(document).ready(function(){
+	$(".img-btn-del").click(function(){
+		var d = $(this).parent().parent();
+		$.post( "shop_imgdel.php",
+		{"img_id":$(this).prop('value'),
+		},
+		function(data) {
+			if(data.status == "ok") {
+				d.children('img').attr('src','../static/img/nopic.jpg');
+			}
+			else {
+				alert('删除失败');
+			}
+		},"json"
+		);
+	});
+	$(".img-btn-del-detail").click(function(){
+		var d = $(this).parent().parent();
+		$.post( "shop_imgdel.php",
+		{"img_id":$(this).prop('value'),
+		},
+		function(data) {
+			if(data.status == "ok") {
+				d.remove();
+			}
+			else {
+				alert('删除失败');
+			}
+		},"json"
+		);
+	});
+	$("#img-btn-new").click(function(){
+		window.location.href='shop_imgupload.php?gid='+getQueryStringByName('gid')+'&img_type=1';
+	});
+	$("#img-btn-rank").click(function(){
+		window.location.href='shop_imgupload.php?gid='+getQueryStringByName('gid')+'&img_type=2';
+	});
+	$("#img-btn-detail").click(function(){
+		window.location.href='shop_imgupload.php?gid='+getQueryStringByName('gid')+'&img_type=3';
+	});
+});
+</script>
+<h1>商品图片管理</h1>
+
+<div class="row">
+  <div class="col-md-6"  id="img-new">
+  <h3>新品图片<h3>
+  <img src="<?php echo $img_new; ?>" class="img-responsive">
+  <p class="img-action"><button type="button" class="btn btn-default img-btn-del" value="<?php echo $img_new_id; ?>">删除</button>&nbsp;&nbsp;&nbsp;<button type="button" id="img-btn-new" class="btn btn-default">上传</button></p>
+  </div>
+  <div class="col-md-6"  id="img-rank">
+  <h3>排行图片<h3>
+  <img src="<?php echo $img_rank; ?>" class="img-responsive">
+  <p class="img-action"><button type="button" class="btn btn-default img-btn-del" value="<?php echo $img_rank_id; ?>">删除</button>&nbsp;&nbsp;&nbsp;<button type="button" id="img-btn-rank" class="btn btn-default">上传</button></p>
+  </div>
+</div>
+<h3>详细信息图片</h3>
+<button type="button" id="img-btn-detail" class="btn btn-default">去传一张</button>
+<div class="row">
+<?php echo $html; ?>
+</div>
+
+</div>
