@@ -9,44 +9,33 @@
   <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
   <script>window.jQuery || document.write('<script src="static/js/jquery.mobile-1.4.0.min.js"><\/script>')</script> 
   <script src="static/js/knockout-3.0.0.js"></script>
- 
 </head>
 
 <body>
 	<div data-role="page" id="page_detail" data-theme="a" >
-		<div data-role="header" data-position="fixed">
-			<a data-role="button" onclick="window.scrollTo(0,0);return false;">详情</a>
-			<h1><span data-bind="text: title"></h1>
-			<a data-role="button" onclick="window.scrollTo(0,99999);return false;">评价</a>
-		</div>
-		
 		<div data-role="content">
-			
 			<!--顶部大图-->
 			<div class = detail_gallery>
 				
 			</div>
-			<p style="float:center">仅售：<span data-bind="text: price"></span></p>
-			<p style="float:center">已售：<span data-bind="text: sale_num"></span>件</p>
+			<p style="float:center">仅售：<?php echo $price?> </p>
+			<p style="float:center">已售：<?php echo $sale_num?> 件</p>
 			<!--购买键-->
 			<div>
-				<a data-bind="attr:{href: purchase_url}" data-ajax="false"><button>购买</button></a>
+				<?php echo $purchase_a_button?>
 			</div>
 			<!--尺码、配送说明-->
 			<div>
 				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
 				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
-				<span style="color:red">特别通知：</span><p data-bind="text:description"></p>
+				<?php echo $description_html ?>
 				<p>尺码对照表：</p>
 				<img src="static/img/size_table.jpg" width="100%"/>
 			</div>
 			<!--图片展示-->
 			<div class = detail_gallery>
-				<ul style="list-style-type: none" data-bind="foreach : detailImgs , visible:detailImgs().length > 0">
-					<li>
-						<!--图片-->
-						<img data-bind="attr:{src: img_url}"/>
-					</li>
+				<ul style="list-style-type: none" >
+					<?php echo $detail_imgs?>
 				<ul>
 			</div>
 			<!--评论区+购买键-->
