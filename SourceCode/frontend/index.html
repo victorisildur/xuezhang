@@ -3,12 +3,11 @@
 
 <head>
   <meta name="viewport" content="width=device-width,  initial-scale=1"> 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
   <link rel="stylesheet" href="static/css/gallery.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
   <script>window.jQuery || document.write('<script src="static/js/jquery.mobile-1.4.0.min.js"><\/script>')</script> 
-  <script src="static/js/knockout-3.0.0.js"></script>
+  
   <script>
 	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 	WeixinJSBridge.call('hideToolbar');
@@ -18,67 +17,47 @@
 
 
 <body>
-<!--新品页面-->
-<div data-role="page" id="page_new" data-theme="a" >
+
+<div data-role="page" data-theme="a" >
 	<!--内容-->
-	<div data-role="content">
-		<!--test-->
-		<p>点击图片就会进入某宝一样的详情购买哦</p>
-		<!--first block of exhibition-->
-		<div>
-			<!--图片展示-->
-			<div class="detail_gallery">
-				<ul style="list-style-type: none" data-bind="foreach : goods_new , visible: goods_new().length > 0">
-					<li>
-						<!--图片-->
-						<a data-bind="attr:{href: 'detail.html?'+gid}" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
-					</li>
+	<div data-role="content" class = "index">
+		<!--新品-->
+		<div id = "goods_new">
+			<div class="section_band">
+				<p>上架新品</p>
+			</div>
+			<div class="index_gallery">
+				<?php echo $goods_new_imgs_li ?>
+			</div>
+		</div>
+		
+		<!--榜单-->
+		<div id="goods_top">
+			<div class="section_band">
+				<p>销量排行</p>
+			</div>
+			<div class="index_gallery" >
+				<ul style="list-style-type: none">
+					<?php echo $goods_top_li ?>
 				<ul>
 			</div>
 		</div>
+		
+		<!--活动-->
+		<div id="activity">
+			<div class="section_band">
+				<p>活动通知</p>
+			</div>
+			<div class = "activity">
+				<p>新一批到货啦，17号截止哦</p>
+			</div>
+		</div>
 	</div><!--end of content-->
-	<!-- 尾栏--> 
-	<div data-role="footer" data-position="fixed">
-		<!--导航栏-->
-		<div data-role="navbar" >
-			<ul>
-				<li><a href="#" class="ui-btn-active ui-state-persist">新品</a></li>
-				<li><a href="#page_bestsales" >榜单</a></li>
-			</ul>
-		</div>
-	</div><!--end of footer-->
-</div><!--end of page_new-->
+		
+	
+</div><!--end of page-->
 
-<!--榜单页面-->
-<div data-role="page" id="page_bestsales" data-theme="a">
-	<!--内容-->
-	<div data-role="content">
-		<!--图片区-->
-		<div class="detail_gallery" >
-			<ul style="list-style-type: none" data-bind="foreach : goods_top , visible:goods_top().length > 0">
-				<li>
-					<!--图片-->
-					<a data-bind="attr:{href: 'detail.html?'+gid}" data-ajax="false"> <img data-bind="attr:{src: img_url}"/> </a>
-					<!--销量，售价-->
-					已售：<span data-bind="text:sale_num"></span>
-					售价：<span data-bind="text:price"></span>
-				</li>
-			<ul>
-		</div>
-	</div> 
-    <!-- 尾栏--> 
-	<div data-role="footer" data-position="fixed">
-		<!--导航栏-->
-		<div data-role="navbar" >
-		<ul>
-			<li><a href="#page_new" >新品</a></li>
-			<li><a href="#" class="ui-btn-active ui-state-persist">榜单</a></li>
-		</ul>
-		</div>
-	</div>
-</div><!--end of page_bestsales-->
 
-<script src="static/js/main_page.js"></script>
 
 
 </body> 
