@@ -69,10 +69,93 @@ ul {
 .activity_card p{
 	margin:5px;
 	padding:10px;
-	border-style : outset;
+	border-style : solid;
 	border-width: 1px;
 	border-color: rgb(215,215,215);
 	border-radius:5px;
 	background-color: rgb(255,255,255);
 	font-size: small;
+}
+/*for detail page*/
+#detail_info {
+	font-family:微软雅黑,宋体;
+	font-size:small;
+	padding-left:10px;
+	padding-bottom:10px;
+	background-color:white;
+	border-style:solid;
+	border-color:white;
+	border-radius:5px;
+	margin:5px;
+}
+#detail_info p{
+	padding:3px;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-bottom-color:rgb(200,200,200);
+}
+
+.detail_gallery img {
+	width:100%;
+}
+.detail_gallery li{
+	border-style : ridge;
+	border-width: 1px;
+	border-color: white;
+	padding:0px;
+	margin:0px;
+}
+.detail_gallery ul{
+	padding:0px;
+}
+
+#order_button {
+	padding-left:20px;
+	padding-right:20px;
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:rgb(255,102,0);
+	border-style:solid;
+	border-width:1px;
+	border-color:rgb(240,102,0);
+	border-radius:3px;
+}
+
+#order_button  strong{
+	color:white;
+}
+.comment_buy {
+	font-family:微软雅黑,宋体;
+	padding-left:20px;
+	background-color:white;
+}
+
+.comment ul{
+	list-style-type: none;
+	padding: 0px;
+}
+.comment li{
+	background-color: white;
+	padding: 2px;
+	margin: 2px;
+	border: 1px;
+	color: black;
+	font-family: 微软雅黑,宋体;
+	font-size: small;
+}
+
+#comment_button {
+	padding-left:20px;
+	padding-right:20px;
+	padding-top:3px;
+	padding-bottom:3px;
+	background-color:rgb(51,153,255);
+	border-style:solid;
+	border-width:1px;
+	border-color:rgb(51,153,255);
+	border-radius:3px;
+}
+
+#comment_button  strong {
+	color:white;
 }
