@@ -1,0 +1,21 @@
+<div class="col-xs-12 col-sm-9">
+<form role="form" method="post">
+  <h1>修改商品</h1>
+  <div class="form-group">
+    <label for="g_title">商品名称</label>
+    <input type="text" class="form-control" id="g_title" placeholder="请输入商品名称" name="title" value="<?php echo $title; ?>">
+  </div>
+  <div class="form-group">
+    <label for="g_price">单价</label>
+    <input type="text" class="form-control" id="g_price" name="price" placeholder="单价" value="<?php echo $price; ?>">
+  </div>
+
+  <div class="form-group">
+  <label for="g_description">商品描述</label>
+  <textarea class="form-control" rows="3" name="description" id="g_description" placeholder="写点什么吧"><?php echo $description; ?></textarea>
+  </div>
+  <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">提交</button>
+</form>
+<br>
+<?php echo $info; ?>
+</div>

@@ -1,0 +1,45 @@
+<script type="text/javascript">
+//根据QueryString参数名称获取值
+     function getQueryStringByName(name){
+         var result = location.search.match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
+         if(result == null || result.length < 1){
+              return "";
+         }
+         return result[1];
+     }
+	 function selectType(){
+		var a = document.getElementById('img_type');
+		a.value = getQueryStringByName('img_type') =='' ? 3 : getQueryStringByName('img_type');
+	}
+	 window.onload=function(){ selectType(); }
+</script>
+<div class="col-xs-12 col-sm-9">
+<form role="form" method="post" enctype ="multipart/form-data">
+  <h1>上传图片</h1>
+  <div class="form-group">
+    <label for="gid">商品id</label>
+    <input type="number" class="form-control" id="gid" value="<?php echo $gid; ?>" placeholder="请输入数字类型的商品id" name="gid">
+  </div>
+  <div class="form-group">
+    <label for="img_type">图片类型</label>
+	<select id="img_type" name="img_type" class="form-control">
+	  <option value='1'>新品榜单</option>
+	  <option value='2'>销量榜单</option>
+	  <option value='3'>详细信息</option>
+    </select>
+	<span class="help-block">详细信息中图片可传多张，新品、销量榜单的图片每种商品限传一张！</span>
+  </div>
+  <div class="form-group">
+    <label for="filename">文件名(可选)</label>
+    <input type="text" class="form-control" id="filename" name="filename" placeholder="留空则自动命名" value="">
+  </div>
+  <div class="form-group">
+    <label for="InputFile">上传图片</label>
+    <input type="file" id="InputFile" name="file">
+    <p class="help-block">文件不要太大哦</p>
+  </div>
+  <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">提交</button>
+</form>
+<br>
+<?php echo $info; ?>
+</div>

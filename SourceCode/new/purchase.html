@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="static/css/jquery.mobile-1.4.0.min.css">
+  <link rel="stylesheet" href="static/css/gallery.css">
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="static/js/jquery.mobile-1.4.0.min.js"></script>
+  <script src="static/js/knockout-3.0.0.js"></script>
+  <script src="http://files.cnblogs.com/dachie/jquery.timers-1.2.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div data-role="page" id="page_detail" data-theme="a" >
+		<!--头栏-->
+		<div data-role="header">
+			<h1>填订单啦</h1>
+		</div>
+		<div data-role="content">
+			<!--填姓名-->
+			<div data-role="fieldcontain">
+				<label for="user">姓名：</label>
+				<input type="text" name="user" placeholder="姓名" data-bind="value : newNameText">
+			</div>
+			<!--填手机-->
+			<div data-role="fieldcontain">
+				<label for="phone">手机：</label>
+				<input type="text" name="phone" placeholder="手机" data-bind="value : newPhoneText">
+			</div>
+			<!--填地址-->
+			<div data-role="fieldcontain">
+				<label for="addr">送货地址：</label>
+				<input type="text" name="addr" placeholder="送货地址" data-bind="value : newAddrText">
+			</div>
+			<!--时间-->
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>请选择时间：</legend>
+						<label for="six">6:00-8:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="6" id="six">
+						<label for="eight">8:00-10:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="8" id="eight">
+						<label for="ten">10:00-11:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="10" id="ten">	
+				</fieldset>
+			</div>
+			<!--颜色-->
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>请选择颜色：</legend>
+						<label for="black">黑色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="black" id="black">
+						<label for="gray">灰色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="gray" id="gray">
+						<label for="white">白色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="white" id="white">	
+				</fieldset>
+			</div>
+			<!--尺寸-->
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>请选择尺寸：</legend>
+						<label for="m">M</label>
+						<input type="radio" data-bind="checked: size" name="size" id="m" value="m">
+						<label for="l">L</label>
+						<input type="radio" data-bind="checked: size" name="size" id="l" value="l">
+						<label for="xl">XL</label>
+						<input type="radio" data-bind="checked: size" name="size" id="xl" value="xl">
+						<label for="xxl">XXL</label>
+						<input type="radio" data-bind="checked: size" name="size" id="xxl" value="xxl">							
+				</fieldset>
+			</div>
+			<!--数量-->
+			<div data-role="fieldcontain">
+				<label for="num">数量：</label>
+				<input type="number" name="num" placeholder="1" data-bind="value:newNumText">
+			</div>
+				
+			<!--增加订单按钮-->
+			<form data-bind="submit: addOrder">
+				<button type="submit" data-bind="text:addOrderBtnText">预览订单</button>
+			</form>
+			<!--显示订单-->
+			<div class="comment">
+				<ul data-bind="foreach: orderFull, visible:orderFull().length>0" style="list-style-type: none">
+					<li>
+						颜色：<span data-bind="text:color"></span>,
+						数量：<span data-bind="text:num"></span>,
+						尺寸：<span data-bind="text:size"></span>
+						<a href="#" data-bind="click: $parent.deleteOrder">删除</a>
+					</li>
+				</ul>
+			</div>
+			<!--下单按钮-->
+			<form data-bind="submit: submitOrder">
+				<button type="submit">提交订单</button>
+			</form>
+		</div>	
+			<!--尾栏-->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="index.html#page_new" data-ajax="false">新品</a></li>
+						<li><a href="index.html#page_bestsales" data-ajax="false">榜单</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<script src="static/js/purchase.js"></script>	
+	
+</body>
+
+</html>

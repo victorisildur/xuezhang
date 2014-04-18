@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="static/css/main_mobile.css">
+  <script src="static/js/jquery.min.js"></script>
+  <!-- <script src="static/js/jquery.mobile-1.4.0.min.js"></script> -->
+  <!--<script src="static/js/knockout-3.0.0.js"></script>-->
+  <title>商品详情</title>
+</head>
+
+<body>
+	<div id="allcontent">		
+		<header><!--顶部大图-->
+			<img src = "static/img/zheda1.jpg">
+		</header>
+		
+		<div id="detail_info">
+			<p>仅售：<strong style="color:red">38元</strong> </p>
+			<p>已售：<strong>333</strong> 件</p>
+			<!--购买键-->
+			<a void id="order_button">
+				<strong>购买</strong>
+			</a>
+		</div>
+		
+		<nav>
+			<div class="nav_unselected" id="comment_tap"><p>评论</p></div>
+			<div class="nav_selected" id="detail_tap"><p>详情</p></div>
+			
+		</nav>
+
+		<section id="detail_section">
+			<div id="detail_info">
+				<!--尺码、配送说明-->
+				<p><span style="color:red">关于产品：</span>非常非常屌，我们的衣服供应商质量真是吓了我们一跳</p>
+				<p><span style="color:red">配送说明：</span>仅限闵行校区</p>
+				<p>尺码对照表：</p>
+				<img src="static/img/size_table.jpg" width="100%"/>
+			</div>	
+			
+			<div class="detail_gallery"><!--图片展示-->
+				<ul>
+					<div id="card_border">
+						<li>
+							<img src="static/img/zheda_s.jpg"/>
+						</li>
+					</div>
+					<div id="card_border">
+						<li>
+							<img src="static/img/zheda1.jpg"/>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</section>	
+		
+		<section id="comment_section">
+			<div class="comment">
+				<ul>
+					<li>
+						<span class="user_name">韦德</span> 
+						<!--亮了-->
+						<a><img src="static/img/light_small.png"/>亮了（<span>100</span>）</a>						
+						<p> 不错不错</p>
+					</li>
+					<li>
+						<span class="user_name">科比</span> 
+						<!--亮了-->
+						<a><img src="static/img/light_small.png"/>亮了（<span>99</span>）</a>						
+						<p> 好极了</p>
+					</li>
+				</ul> 
+			</div>
+			<!--提交评论-->
+			<div class = "submit_comment">
+				用户名: <input placeholder="学长甲" style="display:inline"/>
+				评论:   <input placeholder="说两句吧" style="display:inline"/>			
+				<a id="comment_button"> 
+					<strong>提交评论</strong>
+				</a>
+			</div>	
+		</section>
+	</div>
+	
+
+<!--call for knockoutjs-->
+<script src="static/js/detail2.js"></script>
+<!--<script src="static/js/detail.js"></script>-->
+</body>
+
+</html>

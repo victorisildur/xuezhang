@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  
+  <link rel="stylesheet" href="static/css/main_mobile.css">
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  
+  <script src="static/js/knockout-3.0.0.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="page_detail" >
+		<!--头栏-->
+		<header>
+			<h1>填订单啦</h1>
+		</header>
+		<section class="purchase">
+			<!--填姓名-->
+			<div class="myInputText">
+				<label for="user">姓名：</label>
+				<input type="text" name="user" placeholder="姓名" data-bind="value : newNameText">
+			</div>
+			<!--填手机-->
+			<div class="myInputText">
+				<label for="phone">手机：</label>
+				<input type="text" name="phone" placeholder="手机" data-bind="value : newPhoneText">
+			</div>
+			<!--填地址-->
+			<div class="myInputText">
+				<label for="addr">送货地址：</label>
+				<input type="text" name="addr" placeholder="送货地址" data-bind="value : newAddrText">
+			</div>
+			<!--时间-->
+				<fieldset>
+					<legend>请选择时间：</legend>
+						<label for="six">6:00-8:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="6" id="six">
+						<label for="eight">8:00-10:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="8" id="eight">
+						<label for="ten">10:00-11:00</label>
+						<input type="radio" data-bind="checked: time" name="time" value="10" id="ten">	
+				</fieldset>
+			
+			<!--颜色-->
+			
+				<fieldset >
+					<legend>请选择颜色：</legend>
+						<label for="black">黑色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="black" id="black">
+						<label for="gray">灰色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="gray" id="gray">
+						<label for="white">白色</label>
+						<input type="radio" data-bind="checked: color" name="color" value="white" id="white">	
+				</fieldset>
+			
+			<!--尺寸-->
+			
+				<fieldset >
+					<legend>请选择尺寸：</legend>
+						<label for="m">M</label>
+						<input type="radio" data-bind="checked: size" name="size" id="m" value="m">
+						<label for="l">L</label>
+						<input type="radio" data-bind="checked: size" name="size" id="l" value="l">
+						<label for="xl">XL</label>
+						<input type="radio" data-bind="checked: size" name="size" id="xl" value="xl">
+						<label for="xxl">XXL</label>
+						<input type="radio" data-bind="checked: size" name="size" id="xxl" value="xxl">							
+				</fieldset>
+			
+			<!--数量-->
+			
+				<label for="num">数量：</label>
+				<input type="number" name="num" placeholder="1" data-bind="value:newNumText">
+			
+				
+			<!--增加订单按钮-->
+			<form data-bind="submit: addOrder">
+				<button type="submit" data-bind="text:addOrderBtnText">预览订单</button>
+			</form>
+			<!--显示订单-->
+			<div class="comment">
+				<ul data-bind="foreach: orderFull, visible:orderFull().length>0" style="list-style-type: none">
+					<li>
+						颜色：<span data-bind="text:color"></span>,
+						数量：<span data-bind="text:num"></span>,
+						尺寸：<span data-bind="text:size"></span>
+						<a href="#" data-bind="click: $parent.deleteOrder">删除</a>
+					</li>
+				</ul>
+			</div>
+			<!--下单按钮-->
+			<form data-bind="submit: submitOrder">
+				<button type="submit">提交订单</button>
+			</form>
+		</div>	
+	</section>
+			
+		
+
+<script>
+	var shop_goods_detail = '<?php echo $json; ?>';
+</script>
+<script src="static/js/purchase.js"></script>	
+	
+</body>
+
+</html>

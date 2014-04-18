@@ -1,0 +1,39 @@
+<div class="col-xs-12 col-sm-9">
+<script>
+$(document).ready(function(){
+  $(".ajax-del").click(function(){
+	var t = $(this).parent().parent();
+	var gid = t.attr('id').replace('gid_','');
+	$.post( "shop_itemdel.php",
+	{"gid":gid,
+	},
+	function(data) {
+		if(data.status == "ok") {
+			t.remove();
+		}
+		else {
+			alert('删除失败');
+		}
+	},"json"
+	);
+  });
+});
+</script>
+<h1>商品列表</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>gid</th>
+                  <th>商品名称</th>
+                  <th>单价</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php echo $html; ?>
+              </tbody>
+            </table>
+          </div>
+		  <?php echo $html_page; ?>
+</div>

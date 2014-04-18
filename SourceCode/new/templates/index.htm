@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  <link rel="stylesheet" href="static/css/gallery.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script>window.jQuery || document.write('<script src="static/js/jquery.mobile-1.4.0.min.js"><\/script>')</script> 
+  
+  <script>
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideToolbar');
+	});
+  </script>
+</head>
+
+
+<body>
+
+<div data-role="page" data-theme="a" >
+	<!--内容-->
+	<div data-role="content" class = "index">
+		<!--新品-->
+		<div id = "goods_new">
+			<div class="section_band">
+				<p>上架新品</p>
+			</div>
+			<div class="index_gallery">
+				<?php echo $goods_new_imgs_li; ?>
+			</div>
+		</div>
+		
+		<!--榜单-->
+		<div id="goods_top">
+			<div class="section_band">
+				<p>销量排行</p>
+			</div>
+			<div class="index_gallery" >
+				<ul style="list-style-type: none">
+					<?php echo $goods_top_li; ?>
+				<ul>
+			</div>
+		</div>
+		
+		<!--活动-->
+		<div id="activity">
+			<div class="section_band">
+				<p>活动通知</p>
+			</div>
+			<div class = "activity">
+				<p>新一批到货啦，17号截止哦</p>
+			</div>
+		</div>
+	</div><!--end of content-->
+		
+	
+</div><!--end of page-->
+
+
+
+
+</body> 
+
+</html>
