@@ -25,4 +25,10 @@ foreach($data as $result)
 $tmp['did_array'] = $data;
 $json = json_encode($tmp);
 
+foreach( $json['did_array'] as $did_entry )
+{
+	$did_array[] = $did_entry['detail_id];
+	echo $did_array[];
+}
+
 require_once(TEMPLATES_PATH.'shop_order.html');
