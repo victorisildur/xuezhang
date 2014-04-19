@@ -163,25 +163,28 @@
 		order		订单详情						y			string		数组
 		如：
 		{ "gid" : 1,
-		  "name" : "谭柳柳",
+		  "real_name" : "谭柳柳",
 		  "phone" : "12345678901",
-		  "addr"  : "西53",
-		  "time"  : "6"
+		  "address"  : "西53",
+		  "best_time"  : "6",
+		  "message"   : "快一点",
 		  "order" : 
 		  [
-			{ "color" : "white",
-			  "size" : "xl",
+			{ "detail_id" : 2
 			  "num" : 3
 			},
-			{ "color" : "black",
-			  "size" : "xxl",
+			{ "detail_id" : 3
 			  "num" : 2
 			}
 		  ]
 		}
 	(4)return:
-		{ "status" : "ok"}
-		{ "status" : "failed"}
+		{ "status" : "ok"
+		  "order_sn" : "A12341234123412"
+		}
+		{ "status" : "failed"
+		  "msg"    : "失败请重试"
+		}
 	
 5.后台管理接口描述
 	5.1 获取图片信息接口
