@@ -2,82 +2,170 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
-  
+  <meta name="viewport" content="charset:UTF-8"> 
+  <link rel="stylesheet" href="static/css/metro-bootstrap.css">
+  <link rel="stylesheet" href="static/css/metro-bootstrap-responsive.css">
   <link rel="stylesheet" href="static/css/main_mobile.css">
-  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="static/js/metro.min.js"></script>
   <script src="static/js/knockout-3.0.0.js"></script>
 </head>
 
-<body>
-	<div data-role="page" id="page_detail" >
+<body class="metro">
+	<div id="page_detail" >
 		<!--头栏-->
 		<header>
 			<h1>填订单啦</h1>
 		</header>
 		<section class="purchase">
+		
 			<!--填姓名-->
-			<div class="myInputText">
-				<label for="user">姓名：</label>
+			<div class="input-control text">
+				<label for="user" >姓名：
 				<input type="text" name="user" placeholder="姓名" data-bind="value : newNameText">
-			</div>
+				</label>
+			</div class="input-control text">
 			<!--填手机-->
-			<div class="myInputText">
-				<label for="phone">手机：</label>
+			<div class="input-control text">
+				<label for="phone">手机：
 				<input type="text" name="phone" placeholder="手机" data-bind="value : newPhoneText">
+				</label>
 			</div>
 			<!--填地址-->
-			<div class="myInputText">
-				<label for="addr">送货地址：</label>
+			<div class="input-control text">
+				<label for="addr">送货地址：
 				<input type="text" name="addr" placeholder="送货地址" data-bind="value : newAddrText">
+				</label>
 			</div>
-			<!--时间-->
+			
+			<!--性别-->
 				<fieldset>
-					<legend>请选择时间：</legend>
-						<label for="six">6:00-8:00</label>
-						<input type="radio" data-bind="checked: time" name="time" value="6" id="six">
-						<label for="eight">8:00-10:00</label>
-						<input type="radio" data-bind="checked: time" name="time" value="8" id="eight">
-						<label for="ten">10:00-11:00</label>
-						<input type="radio" data-bind="checked: time" name="time" value="10" id="ten">	
+					<legend>请选择性别：</legend>
+						<div >
+						<?php
+							$didArray = $tmp['did_array'];
+							for( $i = 0; $i < count($didArray) ; $i++)
+							{	
+								for( $j=1; $j < count($didArray) - $i ; $j++)
+								{
+									if($didArray[$i]['sex'] == $didArray[$i+$j]['sex'])
+										array_splice($didArray,$i+$j,1);
+								}
+							}
+							foreach( $didArray as $detailEntry)
+							{
+								switch ( $detailEntry['sex'] )
+								{
+									case 0 :
+										echo $labelInputForSexFemale;
+										break;
+									case 1 :
+										echo $labelInputForSexMale;
+										break;
+									default:
+										echo 'undefined sex';
+								}
+							}
+						?>
+						</div>
 				</fieldset>
 			
 			<!--颜色-->
 			
-				<fieldset >
+				<fieldset>
 					<legend>请选择颜色：</legend>
-						<label for="black">黑色</label>
-						<input type="radio" data-bind="checked: color" name="color" value="black" id="black">
-						<label for="gray">灰色</label>
-						<input type="radio" data-bind="checked: color" name="color" value="gray" id="gray">
-						<label for="white">白色</label>
-						<input type="radio" data-bind="checked: color" name="color" value="white" id="white">	
+						<?php
+							$didArray = $tmp['did_array'];
+							for( $i = 0; $i < count($didArray) ; $i++)
+							{	
+								for( $j=1; $j < count($didArray) - $i ; $j++)
+								{
+									if($didArray[$i]['color'] == $didArray[$i+$j]['color'])
+										array_splice($didArray,$i+$j,1);
+								}
+							}
+							foreach( $didArray as $detailEntry)
+							{
+								switch ( $detailEntry['color'] )
+								{
+									case 0 :
+										echo $labelInputForColorWhite;
+										break;
+									case 1 :
+										echo $labelInputForColorBlack;
+										break;
+									case 2 :
+										echo $labelInputForColorGrey;
+										break;
+									default:
+										echo 'undefined color';
+								}
+							}
+						?>
 				</fieldset>
 			
 			<!--尺寸-->
 			
 				<fieldset >
 					<legend>请选择尺寸：</legend>
-						<label for="m">M</label>
-						<input type="radio" data-bind="checked: size" name="size" id="m" value="m">
-						<label for="l">L</label>
-						<input type="radio" data-bind="checked: size" name="size" id="l" value="l">
-						<label for="xl">XL</label>
-						<input type="radio" data-bind="checked: size" name="size" id="xl" value="xl">
-						<label for="xxl">XXL</label>
-						<input type="radio" data-bind="checked: size" name="size" id="xxl" value="xxl">							
+						<?php
+							$didArray = $tmp['did_array'];
+							for( $i = 0; $i < count($didArray) ; $i++)
+							{	
+								for( $j=1; $j < count($didArray) - $i ; $j++)
+								{
+									if($didArray[$i]['size'] == $didArray[$i+$j]['size'])
+										array_splice($didArray,$i+$j,1);
+								}
+							}
+							
+							foreach( $didArray as $detailEntry )
+							{
+								switch ( $detailEntry['size'] )
+								{
+									case 1 :
+										echo  $labelInputForSizeM ;
+										break;
+									case 2 :
+										echo  $labelInputForSizeL ;
+										break;
+									case 3 :
+										echo  $labelInputForSizeXL;
+										break;
+									case 4 :
+										echo  $labelInputForSizeXXL;
+										break;
+									default:
+										echo 'undefined size';
+								}
+							}
+						?>										
 				</fieldset>
+			<!--剩余数量-->
+				<p>剩余数量：<span id ="left" data-bind="text:left"></span> </p>
+			<!--购买数量-->
 			
-			<!--数量-->
-			
-				<label for="num">数量：</label>
+				<label for="num">购买数量：</label>
 				<input type="number" name="num" placeholder="1" data-bind="value:newNumText">
 			
+			<!--时间-->
+				<fieldset>
+					<legend>请选择送货上门时间：</legend>
+						<label for="six">6:00-8:00
+							<input type="radio" data-bind="checked: time" name="time" value="6" id="six">
+						</label>
+						<label for="eight">8:00-10:00
+							<input type="radio" data-bind="checked: time" name="time" value="8" id="eight">
+						</label>
+						<label for="ten">10:00-11:00
+							<input type="radio" data-bind="checked: time" name="time" value="10" id="ten">	
+						</label>
+				</fieldset>
 				
 			<!--增加订单按钮-->
 			<form data-bind="submit: addOrder">
-				<button type="submit" data-bind="text:addOrderBtnText">预览订单</button>
+				<button type="submit" data-bind="text:addOrderBtnText" class="button default">预览订单</button>
 			</form>
 			<!--显示订单-->
 			<div class="comment">
@@ -92,7 +180,7 @@
 			</div>
 			<!--下单按钮-->
 			<form data-bind="submit: submitOrder">
-				<button type="submit">提交订单</button>
+				<button type="submit" class="button warning">提交订单</button>
 			</form>
 		</div>	
 	</section>
@@ -102,7 +190,7 @@
 <script>
 	var shop_goods_detail = '<?php echo $json; ?>';
 </script>
-<script src="static/js/purchase.js"></script>	
+<script src="static/js/purchase2.js"></script>	
 	
 </body>
 
