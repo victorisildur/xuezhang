@@ -122,7 +122,7 @@
 		}
 		{"status":"fail", "msg":"没有了~"}
 		
-	4.6商品详情接口
+	4.6商品详情接口（DIE）
 	(1)功能说明：获取款设计
 	(2)请求说明：post参数到后端shop_detail.php?action=detail页面
 	(3)parameter:
@@ -148,8 +148,28 @@
 		 "description" : "这款黑色略掉色，请不要与淡色衣物混洗。近期缺货，4.14日第二批到货。非常非常屌，我们的供货商质量真是吓了我们一跳"
 		}
 		{"status":"fail", "msg":"没有了~"}
-		 
-	4.7订单提交接口
+	(5)备注：php直接输出，接口作废
+	
+	4.7商品库存获取接口
+	(1)功能说明：获取一件衣服的具体库存
+	(2)请求说明：php直接输出到shop_order.html的一段js中
+	(3)parameter:
+		{did_array:
+			[
+				{
+				detail_id: 1
+				goods_id: 1
+				color: 白黑灰 012
+				size:  s m l xl xxl xxxl 0-5
+				sex:   0女  1男
+				left:  剩余数量
+				},
+				{
+				}
+			]
+		}
+	
+	4.8订单提交接口
 	(1)功能说明：提交订单数据
 	(2)请求说明：post参数到后端shop_order.php页面
 	(3)parameter:
