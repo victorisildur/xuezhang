@@ -40,14 +40,14 @@ function InputFilterForOrder()
 	//判断$_POST['orders']数组
 	if(!is_array($_POST['orders'])) return false;
 	foreach ($_POST['orders'] as $order) {
-		if(!is_int($order['detail_id'])) return false;
-		if(!is_int($order['num'])) return false;
+		if(!is_numeric($order['detail_id'])) return false;
+		if(!is_numeric($order['num'])) return false;
 	}
 	//用户信息phone, real_name, best_time, addres, message
 	//用户信息只有best_time是整数型，其他都是字符串
-	if(!is_int($_POST['best_time'])) return false;
+	if(!is_numeric($_POST['best_time'])) return false;
 	//gid
-	if(!is_int($_REQUEST['gid'])) return false;
+	if(!is_numeric($_REQUEST['gid'])) return false;
 
 	return true;
 }

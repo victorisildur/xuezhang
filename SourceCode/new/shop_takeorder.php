@@ -15,7 +15,7 @@ if(!InputFilterForOrder())
 	die();
 }
 
-$gid = $_REQUEST'gid'];
+$gid = $_REQUEST['gid'];
 
 $order_array = array();
 foreach ($_POST['orders'] as $order)
