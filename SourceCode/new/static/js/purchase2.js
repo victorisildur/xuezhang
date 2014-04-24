@@ -94,7 +94,7 @@ function OrderViewModel() {
 						   "best_time" : this.time(),
 						   "orders": ko.toJS(self.orderFull)
 							  };
-			$.post("http://localhost/shop_takeorder.php",
+			$.post("shop_takeorder.php",
 				mydata, function(data) {
 					
 				},"json"
