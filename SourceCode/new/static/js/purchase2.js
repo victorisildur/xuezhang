@@ -20,6 +20,14 @@ function OrderViewModel() {
 	var self = this;
 	self.orderFull = ko.observableArray([]);
 	
+	//获取gid,
+	var href = window.location.href;
+	var index = href.indexOf('=');
+	if(index != -1) {
+		var gid = href.substr(index+1);
+	};
+	console.log("gid:"+gid);
+	
 	//color,size,time,sex
 	self.color = ko.observable();
 	self.size = ko.observable();
@@ -52,30 +60,10 @@ function OrderViewModel() {
 		console.log("select color:"+this.color() );
 		this.addOrderBtnText("加一单");
 		
-		if(isPhone(this.newPhoneText()) && isChinese(this.newNameText()) ) {
-			console.log("select color in if:"+this.color() );
-			
-			var i = findIndexInDidArrayMatchingSelection();
-			if(i== -1 )
-			{
-				alert("没有这款库存！");
-			} else {
-				var selectedDetailId = detailIdJson.did_array[i].detail_id;
-				console.log("detail_id matched!! value is :" + selectedDetailId);
-			}
-			
-			var orderItem = {
-							detail_id:selectedDetailId,
-							num: Number(this.newNumText()),
-							color: this.color(),
-							size:  this.size()
-							};
-			self.orderFull.push(new OrderConstructor(orderItem));
-		}
-		else {
-			alert("手机号码或姓名输入不正确");
-		}
+		pushAllInputsIntoOrderFull();
 	}
+	
+	
 	
 	//删除订单
 	self.deleteOrder = function(orderItem) {
@@ -85,7 +73,7 @@ function OrderViewModel() {
 	//提交订单
 	self.submitOrder = function() {
 		console.log("press submit order btn");
-		if(isPhone(this.newPhoneText()) && isChinese(this.newNameText()) ) {
+		    pushAllInputsIntoOrderFull();
 			//send to shop_takeorder.php
 			var mydata = { "real_name": this.newNameText,
 						   "phone": this.newPhoneText,
@@ -94,12 +82,15 @@ function OrderViewModel() {
 						   "best_time" : this.time(),
 						   "orders": ko.toJS(self.orderFull)
 							  };
-			$.post("shop_takeorder.php",
+			$.post("shop_takeorder.php?gid="+gid,
 				mydata, function(data) {
-					
+					if(data.status=='ok')
+					{
+						window.location.href = "index.php"
+					}
 				},"json"
 			);
-		}
+		
     };
 	
 	//判断手机号
@@ -127,24 +118,49 @@ function OrderViewModel() {
 	
 	//return index in did_array that matches 'sex','color','size' that we selected
 	//if no one matches, return -1
-	function findIndexInDidArrayMatchingSelection() {
-	
-	var i=0;
-	while(i<detailIdJson.did_array.length) {
-		if(detailIdJson.did_array[i].color==self.color() &&
-		   detailIdJson.did_array[i].size ==self.size()  &&
-		   detailIdJson.did_array[i].sex  ==self.sex() )
-			break;
-		i++;
+	function findIndexInDidArrayMatchingSelection() {	
+		var i=0;
+		while(i<detailIdJson.did_array.length) {
+			if(detailIdJson.did_array[i].color==self.color() &&
+			   detailIdJson.did_array[i].size ==self.size()  &&
+			   detailIdJson.did_array[i].sex  ==self.sex() )
+				break;
+			i++;
+		}
+		if(i==detailIdJson.did_array.length)
+		{
+			return -1;
+		} else {
+			return i;
+		}	
 	}
-	if(i==detailIdJson.did_array.length)
-	{
-		return -1;
-	} else {
-		return i;
-	}
 	
-}
+	//把当前input加入到orderFull数组
+	function pushAllInputsIntoOrderFull() {
+		if( isPhone(self.newPhoneText()) && isChinese(self.newNameText()) ) {
+			//console.log("select color in if:"+this.color() );
+			
+			var i = findIndexInDidArrayMatchingSelection();
+			if(i== -1 )
+			{
+				alert("没有这款库存！");
+			} else {
+				var selectedDetailId = detailIdJson.did_array[i].detail_id;
+				console.log("detail_id matched!! value is :" + selectedDetailId);
+			}
+			
+			var orderItem = {
+							detail_id:selectedDetailId,
+							num: Number(self.newNumText()),
+							color: self.color(),
+							size:  self.size()
+							};
+			self.orderFull.push(new OrderConstructor(orderItem));
+		}
+		else {
+			alert("手机号码或姓名输入不正确");
+		}
+	}
 }
 
 ko.applyBindings(new OrderViewModel());

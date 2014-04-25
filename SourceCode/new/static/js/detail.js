@@ -46,9 +46,7 @@ function DetailViewModel(){
 		var gid = href.substr(index+1);
 	};
 	console.log("gid:"+gid);
-	var order_url = 'shop_order.php?gid='+gid;
-	self.purchase_url = ko.observable(order_url);
-	console.log(self.purchase_url);
+	
 	
 	//初始化获取评论
 	//getComment(4,0,"rank");
