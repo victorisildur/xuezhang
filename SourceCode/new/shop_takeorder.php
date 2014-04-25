@@ -45,13 +45,10 @@ $order_sn = TakeOrder($gid, $order_array, $price, $userinfo);
 if(!$order_sn)
 {
 	//order_fail.html 需填充$err_info
-	$err_info = '系统错误，请重试！';
-	require_once(TEMPLATES_PATH.'order_fail.html');
-	die();
+	die(json_encode(array('status'=>'fail', 'msg'=>$err_info)));
 }
 else
 {
 	//order_success.html 需填充$order_sn
-	require_once(TEMPLATES_PATH.'order_success.html');
-	die();
+	die(json_encode(array('status'=>'ok', 'msg'=>$order_sn)));
 }

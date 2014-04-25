@@ -75,9 +75,7 @@ function GetLeftByDetailID($detail_id)
 function GenerateOrderSN()
 {
 	$year_code = array('A','B','C','D','E','F','G','H','I','J');
-	$order_sn = $year_code[intval(date('Y'))-2014].
-	strtoupper(dechex(date('m'))).date('d').
-	substr(time(),-5).substr(microtime(),2,5).sprintf('%d',rand(10,99));
+	$order_sn = $year_code[intval(date('Y'))-2014].	substr(time(),-4).sprintf('%d',rand(10,99));
 	return $order_sn;
 }
 //$order_array[0] = array(detail_id, num)
