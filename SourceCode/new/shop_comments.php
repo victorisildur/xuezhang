@@ -11,6 +11,9 @@ $action = trim($_GET['action']);
 switch ($action)
 {
 case 'submit':
+	if($_COOKIE['comment_times'] == 3) die(json_encode(array('status'=>'many')));
+	if(empty($_COOKIE['comment_times'])) setcookie('comment_times', 1);
+	else setcookie('comment_times', $_COOKIE['comment_times']++);
 	if(empty($_POST['comment'])) die(json_encode(array('status'=>'fail')));
 	$goods_id = intval($_POST['gid']);
 	$nick_name = $conn->sqlesc($_POST['user_name']);
