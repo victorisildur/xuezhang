@@ -66,11 +66,13 @@
 			</div>
 			<!--提交评论-->
 			<div class = "submit_comment">
+				<button data-bind="click: viewMoreComments  ">更多评论</button>
 				用户名: <input placeholder="学长甲" style="display:inline" data-bind="value: newUserName"/>
 				评论:   <input placeholder="说两句吧" style="display:inline" data-bind="value: newCommentText"/>			
-				<a id="comment_button" data-bind="click: submitComment()">
+				<a id="comment_button" data-bind="click: submitComment">
 					<strong>提交评论</strong>
 				</a>
+				
 			</div>	
 		</section>
 	</div>

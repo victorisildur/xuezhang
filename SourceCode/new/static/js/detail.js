@@ -1,4 +1,4 @@
-﻿//click button
+﻿//section click actions
 $(document).ready(function() {
 	$("#comment_section").hide();
 });
@@ -21,7 +21,8 @@ $("#detail_tap").click( function(){
 	$("#comment_tap").addClass("nav_unselected");	
 });
 
-//get comments
+
+//get comments MVVC
 function Comments(data) {
 	this.user_name = data.user_name;
 	this.comment = data.comment;
@@ -35,6 +36,7 @@ function DetailViewModel(){
 	self.newUserName = ko.observable();
 	self.newCommentText = ko.observable();
 	
+	var totalCommentCount =0;
 	//self.purchase_url = ko.observable();
 	
 	//获取gid,
@@ -49,20 +51,26 @@ function DetailViewModel(){
 	console.log(self.purchase_url);
 	
 	//初始化获取评论
-	 $.post("shop_comments.php?action=get", 
-	{"gid":gid,
-	 "num":5,
-	 "count":0,
-	 "type":"rank"
-	},
-	function(data) {
-        // Update view model properties
-		if( data.status == 'ok'){		
-			var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
-			self.comments(mappedComments);
-		}
-    },"json"); 
+	//getComment(4,0,"rank");
+	$.post("shop_comments.php?action=get", 
+		{"gid":gid,
+		 "num":4,
+		 "count":0,
+		 "type":"rank"
+		},
+		function(data) {
+			// Update view model properties
+			if( data.status == 'ok'){	
+				var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+				self.comments(mappedComments);
+			}
+		},"json"); 
+	totalCommentCount += 4;
 	
+	//获取更多评论
+	self.viewMoreComments = function() {
+		getComment(4,totalCommentCount,"rank");
+	}
 	
 	//提交评论
 	self.submitComment = function() {  
@@ -124,6 +132,7 @@ function DetailViewModel(){
 						function(data) {
 							// Update view model properties
 							if( data.status == 'ok') {	
+								
 								var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
 								self.comments(mappedComments);
 							}
@@ -137,6 +146,37 @@ function DetailViewModel(){
 		}
 	};
 	
+	self.clickTest = function(){
+		console.log("click test");
+	}
+	
+	//获取comment并加入本地数组
+	function getComment(num, count, type) {
+		totalCommentCount += num;
+		$.post("shop_comments.php?action=get", 
+		{"gid":gid,
+		 "num":num,
+		 "count":count,
+		 "type":type
+		},
+		function(data) {
+			// Update view model properties
+			if( data.status == 'ok'){
+				var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+				console.log("mappedComments "+mappedComments);
+				//如何遍历object?
+				
+				/*for (commentEntry in mappedComments)
+				{	
+					console.log("commentEntry"+commentEntry);
+					//console.log("comment entry user name: "+commentEntry['user_name']);
+					self.comments.push(commentEntry);
+				}*/
+				var mappedComments = $.map(data.comments, function(item) {return new Comments(item)} );
+				self.comments(mappedComments);
+			}
+		},"json"); 
+	}
 }
 
 //bind
