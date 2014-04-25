@@ -11,8 +11,7 @@ $conn = new DBClass();
 if(!InputFilterForOrder())
 {
 	$err_info = '输入有误，请检查！';
-	require_once(TEMPLATES_PATH.'order_fail.html');
-	die();
+	die(json_encode(array('status'=>'fail', 'msg'=>$err_info)));
 }
 
 $gid = $_REQUEST['gid'];
@@ -26,8 +25,7 @@ foreach ($_POST['orders'] as $order)
 	if($left<$order['num'])
 	{
 		$err_info = '库存不足，请检查数量！';
-		require_once(TEMPLATES_PATH.'order_fail.html');
-		die();
+		die(json_encode(array('status'=>'fail', 'msg'=>$err_info)));
 	}
 	$order_array[] = array('detail_id'=>$detail_id, 'num'=>$order['num']);
 }
