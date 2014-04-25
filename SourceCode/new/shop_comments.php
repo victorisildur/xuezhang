@@ -11,6 +11,7 @@ $action = trim($_GET['action']);
 switch ($action)
 {
 case 'submit':
+	if(empty($_POST['comment'])) die(json_encode(array('status'=>'fail')));
 	$goods_id = intval($_POST['gid']);
 	$nick_name = $conn->sqlesc($_POST['user_name']);
 	$content = $conn->sqlesc($_POST['comment']);
