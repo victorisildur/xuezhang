@@ -2,167 +2,178 @@
 <html>
 
 <head>
-  <meta name="viewport" charset="UTF-8"> 
-  <link rel="stylesheet" href="../static/css/metro-bootstrap.css">
-  <link rel="stylesheet" href="../static/css/metro-bootstrap-responsive.css">
-  <!--<link rel="stylesheet" href="../static/css/main_mobile.css">-->
-  
+  <meta name="viewport" content="width=device-width,  initial-scale=1" charset="UTF-8">
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/purchase.css">
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-  
   <script src="static/js/knockout-3.0.0.js"></script>
 </head>
 
-<body class="metro">
-	<div id="page_detail" class="container" >
-		<!--头栏-->
-		<header>
-			<h1>填订单啦</h1>
-		</header>
-		<section class="purchase">
-			<!--填姓名-->
-			<div class="input-control text">
-				<label>姓名：</label>
-				<input type="text" name="user" placeholder="姓名" data-bind="value : newNameText">
-			</div>
-			
-			<!--填手机-->
-			<div class="input-control text">
-				<label>手机：</label>
-				<input type="text" name="phone" placeholder="手机" data-bind="value : newPhoneText">
-			</div>
-			
-			<!--填地址-->
-			<div class="input-control text">
-				<label>送货地址：</label>
-				<input type="text" name="addr" placeholder="送货地址" data-bind="value : newAddrText">
-			</div>
-			
-			<!--性别-->
-			<fieldset>
-				<label>请选择性别：</label>
-					<div class="input-control radio">
-						<?php
-							$didArray = $tmp['did_array'];
-							for( $i = 0; $i < count($didArray) ; $i++)
-							{	
-								for( $j=1; $j < count($didArray) - $i ; $j++)
-								{
-									if($didArray[$i]['sex'] == $didArray[$i+$j]['sex'])
-										array_splice($didArray,$i+$j,1);
-								}
-							}
-							foreach( $didArray as $detailEntry)
-							{
-								switch ( $detailEntry['sex'] )
-								{
-									case 0 :
-										echo $labelInputForSexFemale;
-										break;
-									case 1 :
-										echo $labelInputForSexMale;
-										break;
-									default:
-										echo 'undefined sex';
-								}
-							}
-						?>
+<body>
+	<div class="container">
+		<div class="fillingOrder">
+			<!--nav bar-->
+			<div class="navbar-wrapper">
+				<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+					<div class="container">
+						<div class="navbar-header">
+						  <a class="navbar-brand" href="index.php">首页</a>
+						</div>
 					</div>
-			</fieldset>
+				</div>
+			</div>
+			<h1>填订单啦</h1>			
+			<!--name , phone , addr inline-->
+			<form class="form-inline">
+				<div class="form-group">
+					<label>姓名：</label>
+					<input class="form-control" type="text" name="user" placeholder="姓名" data-bind="value : newNameText">
+				</div>
+				
+				<!--填手机-->
+				<div class="form-group">
+					<label>手机：</label>
+					<input class="form-control" type="text" name="phone" placeholder="手机" data-bind="value : newPhoneText">
+				</div>
 			
-			<!--颜色-->
 			
-			<fieldset>
-				<label>请选择颜色：</label>
-					<div class="input-control radio">
-						<?php
-							$didArray = $tmp['did_array'];
-							for( $i = 0; $i < count($didArray) ; $i++)
-							{	
-								for( $j=1; $j < count($didArray) - $i ; $j++)
-								{
-									if($didArray[$i]['color'] == $didArray[$i+$j]['color'])
-										array_splice($didArray,$i+$j,1);
-								}
-							}
-							foreach( $didArray as $detailEntry)
-							{
-								switch ( $detailEntry['color'] )
-								{
-									case 0 :
-										echo $labelInputForColorWhite;
-										break;
-									case 1 :
-										echo $labelInputForColorBlack;
-										break;
-									case 2 :
-										echo $labelInputForColorGrey;
-										break;
-									default:
-										echo 'undefined color';
-								}
-							}
-						?>
-					</div>
-			</fieldset>
+				<!--填地址-->
+				<div class="form-group">
+					<label>送货地址：</label>
+					<input class="form-control" type="text" name="addr" placeholder="送货地址" data-bind="value : newAddrText">
+				</div>
+			</form>
 			
-			<!--尺寸-->
-			
-				<fieldset >
-					<label>请选择尺寸：</label>
-						<div class="input-control radio">
+			<div id="tri-block">
+				<!--性别-->
+				<fieldset id="sex-block">
+					<label>请选择性别：</label>					
 							<?php
 								$didArray = $tmp['did_array'];
 								for( $i = 0; $i < count($didArray) ; $i++)
 								{	
 									for( $j=1; $j < count($didArray) - $i ; $j++)
 									{
-										if($didArray[$i]['size'] == $didArray[$i+$j]['size'])
+										if($didArray[$i]['sex'] == $didArray[$i+$j]['sex'])
 											array_splice($didArray,$i+$j,1);
 									}
 								}
-								
-								foreach( $didArray as $detailEntry )
+								foreach( $didArray as $detailEntry)
 								{
-									switch ( $detailEntry['size'] )
+									switch ( $detailEntry['sex'] )
 									{
+										case 0 :
+											echo $labelInputForSexFemale;
+											break;
 										case 1 :
-											echo  $labelInputForSizeM ;
-											break;
-										case 2 :
-											echo  $labelInputForSizeL ;
-											break;
-										case 3 :
-											echo  $labelInputForSizeXL;
-											break;
-										case 4 :
-											echo  $labelInputForSizeXXL;
+											echo $labelInputForSexMale;
 											break;
 										default:
-											echo 'undefined size';
+											echo 'undefined sex';
 									}
 								}
 							?>
-						</div>	
 				</fieldset>
+				
+				<!--颜色-->
+				
+				<fieldset id="color-block">
+					<label>请选择颜色：</label>
+							<?php
+								$didArray = $tmp['did_array'];
+								for( $i = 0; $i < count($didArray) ; $i++)
+								{	
+									for( $j=1; $j < count($didArray) - $i ; $j++)
+									{
+										if($didArray[$i]['color'] == $didArray[$i+$j]['color'])
+											array_splice($didArray,$i+$j,1);
+									}
+								}
+								foreach( $didArray as $detailEntry)
+								{
+									switch ( $detailEntry['color'] )
+									{
+										case 0 :
+											echo $labelInputForColorWhite;
+											break;
+										case 1 :
+											echo $labelInputForColorBlack;
+											break;
+										case 2 :
+											echo $labelInputForColorGrey;
+											break;
+										default:
+											echo 'undefined color';
+									}
+								}
+							?>
+				</fieldset>
+				
+				<!--尺寸-->
+				<fieldset id="size-block">
+				<label>请选择尺寸：</label>
+					<div >
+						<?php
+							$didArray = $tmp['did_array'];
+							for( $i = 0; $i < count($didArray) ; $i++)
+							{	
+								for( $j=1; $j < count($didArray) - $i ; $j++)
+								{
+									if($didArray[$i]['size'] == $didArray[$i+$j]['size'])
+										array_splice($didArray,$i+$j,1);
+								}
+							}
+							
+							foreach( $didArray as $detailEntry )
+							{
+								switch ( $detailEntry['size'] )
+								{
+									case 1 :
+										echo  $labelInputForSizeM ;
+										break;
+									case 2 :
+										echo  $labelInputForSizeL ;
+										break;
+									case 3 :
+										echo  $labelInputForSizeXL;
+										break;
+									case 4 :
+										echo  $labelInputForSizeXXL;
+										break;
+									default:
+										echo 'undefined size';
+								}
+							}
+						?>
+					</div>	
+			</fieldset>
+			</div>
 			<!--剩余数量-->
 				<p>剩余数量：<span id ="left" data-bind="text:left"></span> </p>
-			<!--购买数量-->
 			
+			
+			<!--购买数量-->
+			<div class="form-group">
 				<label for="num">购买数量：</label>
-				<input type="number" name="num" placeholder="1" data-bind="value:newNumText">
+				<input id="myBuyNumInput" type="number" name="num" placeholder="1" data-bind="value:newNumText">
+			</div>
 			
 			<!--时间-->
 				<fieldset>
 					<label>请选择送货上门时间：</label>
-						<div class="input-control radio">
+						<div class="radio">
 							<label for="six">
 								<input type="radio" data-bind="checked: time" name="time" value="6" id="six">
 								<span class="check"></span>6:00-8:00
 							</label>
+						</div>
+						<div class="radio">
 							<label for="eight">
 								<input type="radio" data-bind="checked: time" name="time" value="8" id="eight">
 								<span class="check"></span>8:00-10:00
 							</label>
+						</div>
+						<div class="radio">
 							<label for="ten">
 								<input type="radio" data-bind="checked: time" name="time" value="10" id="ten">	
 								<span class="check"></span>10:00-11:00
@@ -172,7 +183,7 @@
 				
 			<!--增加订单按钮-->
 			<form data-bind="submit: addOrder">
-				<button type="submit" data-bind="text:addOrderBtnText" class="button default">预览订单</button>
+				<button type="submit" data-bind="text:addOrderBtnText" class="btn btn-info btn-lg btn-block myBtn">预览订单</button>
 			</form>
 			<!--显示订单-->
 			<div class="comment">
@@ -187,9 +198,9 @@
 			</div>
 			<!--下单按钮-->
 			<form data-bind="submit: submitOrder">
-				<button type="submit" class="button warning">提交订单</button>
+				<button type="submit" class="btn btn-warning btn-lg btn-block myBtn">提交订单</button>
 			</form>
-		</section>	
+		</div>	
 	</div>
 			
 		

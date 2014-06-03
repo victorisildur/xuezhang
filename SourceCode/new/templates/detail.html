@@ -2,8 +2,10 @@
 <html>
 
 <head>
-  <meta name="viewport" charset="UTF-8">
-  <link rel="stylesheet" href="static/css/main_mobile.css">
+  <meta name="viewport" content="width=device-width,  initial-scale=1"> 
+  
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/main_mobile.css">
   <script src="static/js/jquery.min.js"></script>
   <!-- <script src="static/js/jquery.mobile-1.4.0.min.js"></script> -->
   <script src="static/js/knockout-3.0.0.js"></script>
@@ -11,7 +13,25 @@
 </head>
 
 <body>
-	<div id="allcontent">		
+	<div id="allcontent">
+	
+		<div class="navbar-wrapper">
+			<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+					  <a class="navbar-brand" href="index.php">首页</a>
+					</div>
+					<div class="navbar-collapse collapse">
+					  <ul class="nav navbar-nav">
+						<li class="active"><a href="#cmt_puc">详情</a></li>
+						<li><a href="#cmt_puc">评价</a></li>
+						<li><a href="#detail_info">购买</a></li>
+					  </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<header><!--顶部大图-->
 			<img src = "<?php echo $img_top; ?>">
 		</header>
@@ -25,10 +45,9 @@
 			</a>
 		</div>
 		
-		<nav>
+		<nav id="cmt_puc">
 			<div class="nav_unselected" id="comment_tap"><p>评论</p></div>
 			<div class="nav_selected" id="detail_tap"><p>详情</p></div>
-			
 		</nav>
 
 		<section id="detail_section">
@@ -71,13 +90,16 @@
 				评论:   <input placeholder="说两句吧" style="display:inline" data-bind="value: newCommentText"/>			
 				<a id="comment_button" data-bind="click: submitComment">
 					<strong>提交评论</strong>
-				</a>				
+				</a>
+				
 			</div>	
 		</section>
 	</div>
 	
-<script src="static/js/detail.js"></script>
 
+<!--call for knockoutjs-->
+<script src="static/js/detail.js"></script>
+<!--<script src="static/js/detail.js"></script>-->
 </body>
 
 </html>

@@ -1,0 +1,45 @@
+.fillingOrder {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+@media screen and (min-device-width: 1200px)
+{
+	.fillingOrder {
+		width:70%;
+	}
+	
+	.myBtn {
+		width:50%;
+		margin-left:auto;
+		margin-right:auto;
+		margin-bottom:20px;
+	}
+	
+	/*three block horizon*/
+	#tri-block {
+		height:130px;
+	}
+	
+	#sex-block {
+		width: 29%;
+		float:left;
+	}
+	
+	#color-block {
+		width: 29%;
+		float:left;
+	}
+	
+	#size-block {
+		width: 29%;
+		float:left;
+	}
+	
+	/*order number*/
+	#myBuyNumInput {
+		display:block;
+		width:29%;
+	}
+}

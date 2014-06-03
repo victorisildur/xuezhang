@@ -18,7 +18,16 @@ body {
 		margin-right: auto;
 	}
 }
+/*for index page*/
+ul , li
+{
+	padding:0px ;
+	margin:0px ;
+}
 
+.index_gallery  img{
+	width : 100%;
+}
 header {
 	font-family:微软雅黑,宋体;
 	font-size:medium;

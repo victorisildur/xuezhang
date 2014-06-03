@@ -1,0 +1,17 @@
+.grey-block {
+	background-color: #ddd;
+	padding:20px;
+}
+
+.white-block {
+	padding:20px;
+}
+
+@media screen and (min-device-width: 1200px)
+{
+	.myBtn {
+		width:50%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+}
